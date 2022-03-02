@@ -1,94 +1,105 @@
-const board = document.getElementById('board');
-const boardCtx = board.getContext('2d');
-// let apple = [math.random] // random position
-// function createSquares () {
-//     for (let i = 0; i < 400; i++) {
+const board = document.getElementById("board");
+const boardCtx = board.getContext("2d");
 
-//     }
-// }
-// const snakeHead = [snakeHeadX, SnakeHeadY]
+let score = 0
 
-let squareCount = 40 //Make adjustable in settings
-let squareSize = board.width / squareCount
+let squareCount = 40; //Make adjustable in settings
+let squareSize = board.width / squareCount;
 
-let snakeHeadX = board.width / 2
-let snakeHeadY = board.width / 2
-let xVelocity = 0
-let yVelocity = 0
+let snakeHeadX = board.width / 2;
+let snakeHeadY = board.width / 2;
 
-let snakeSpeed = 10 // frames per second
+let velocityX = 0;
+let velocityY = 0;
 
-function changeDirection (event) {
+let appleX = board.width / 2;
+let appleY = board.width / 4;
+
+let snakeSpeed = 10; // also frames per second
+
+function changeDirection(event) {
+  if (event.keyCode === 38) {
     //ArrowUp
-    if (event.keyCode === 38) {
-        if (yVelocity === squareSize) {
-            return;
-        } else {
-        yVelocity = -squareSize;
-        xVelocity = 0;
-        }
+    if (velocityY === squareSize) {
+      return;
+    } else {
+      velocityY = -squareSize;
+      velocityX = 0;
     }
+  }
 
+  if (event.keyCode === 40) {
     //ArrowDown
-    if (event.keyCode === 40) { 
-        if (yVelocity === -squareSize) {
-            return;
-        } else {
-        yVelocity = squareSize;
-        xVelocity = 0;
-        }
+    if (velocityY === -squareSize) {
+      return;
+    } else {
+      velocityY = squareSize;
+      velocityX = 0;
     }
+  }
 
+  if (event.keyCode === 37) {
     //ArrowLeft
-    if (event.keyCode === 37) { 
-        if (xVelocity === squareSize) {
-            return;
-        } else {
-        yVelocity = 0;
-        xVelocity = -squareSize;
-        }
+    if (velocityX === squareSize) {
+      return;
+    } else {
+      velocityY = 0;
+      velocityX = -squareSize;
     }
+  }
 
+  if (event.keyCode === 39) {
     //ArrowRight
-    if (event.keyCode === 39) {
-        if (xVelocity === -squareSize) {
-            return;
-        } else {
-        yVelocity = 0;
-        xVelocity = squareSize;
-        }
+    if (velocityX === -squareSize) {
+      return;
+    } else {
+      velocityY = 0;
+      velocityX = squareSize;
     }
+  }
 }
 
 function moveSnake() {
-    snakeHeadX += xVelocity
-    snakeHeadY += yVelocity
+  snakeHeadX += velocityX;
+  snakeHeadY += velocityY;
+  console.log(snakeHeadX)
+}
+
+function checkForApple() {
+    if (snakeHeadX === appleX && snakeHeadY === appleY) {
+        score += 100
+        appleX = Math.floor(Math.random() * squareSize * squareCount)
+        appleY = Math.floor(Math.random() * squareSize * squareCount)
+    }
 }
 
 function renderNewFrame() {
-    //Render board
-    boardCtx.fillStyle = 'black'
-    boardCtx.fillRect(0, 0, board.width, board.height);
+  //clear the entire board
+  boardCtx.fillStyle = "black";
+  boardCtx.fillRect(0, 0, board.width, board.height);
 
-    //Render snake
-    boardCtx.fillStyle = 'lime'
-    boardCtx.fillRect (snakeHeadX, snakeHeadY, squareSize, squareSize)
+  //render apple
+  boardCtx.fillStyle = "red";
+  boardCtx.fillRect(appleX, appleY, squareSize, squareSize);
+  console.log(appleX)
+
+  //render snake
+  boardCtx.fillStyle = "lime";
+  boardCtx.fillRect(snakeHeadX, snakeHeadY, squareSize, squareSize);
 }
 
 
-function gameFrame() {
-    moveSnake()
-    renderNewFrame ()
-    // checkAppleCollision()
-    // checkSnakeCollision()
+function newGameFrame() {
+    moveSnake();
+    checkForApple();
+    renderNewFrame();
+  // checkSnakeCollision()
 }
 
+document.addEventListener("keydown", changeDirection);
 
-
-document.addEventListener('keydown', changeDirection);
-
-setInterval (function () {
-    gameFrame()
+setInterval(function () {
+  newGameFrame();
 }, 1000 / snakeSpeed);
 
 /*

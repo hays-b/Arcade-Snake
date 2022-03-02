@@ -11,10 +11,11 @@ body {
     /* background-color: black; */
     background-color: white;
 }
-#board {
+/* #board {
     margin: 2rem;
     border: solid 1rem rgb(97, 38, 38);
     width: 80vmin;
     height: 80vmin;
-    display: flex;
+    display: flex; 
 }
+*/

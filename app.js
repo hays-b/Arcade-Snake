@@ -23,11 +23,9 @@ let velocityY = 0;
 let snakeSpeed = 10; // also frames per second
 
 function changeDirection(event) {
-  //   let bodyX = bodySquares[0][0];
-  //   let bodyY = bodySquares[0][1];
   //ArrowUp
   if (event.keyCode === 38) {
-    if (velocityY === 1) {
+    if (bodySquares[1][1] < snakeHeadY) {
       return;
     } else {
       velocityX = 0;
@@ -37,7 +35,7 @@ function changeDirection(event) {
 
   //ArrowDown
   if (event.keyCode === 40) {
-    if (velocityY === -1) {
+    if (bodySquares[1][1] > snakeHeadY) {
       return;
     } else {
       velocityX = 0;
@@ -47,7 +45,7 @@ function changeDirection(event) {
 
   //ArrowLeft
   if (event.keyCode === 37) {
-    if (velocityX === 1) {
+    if (bodySquares[1][0] < snakeHeadX) {
       return;
     } else {
       velocityX = -1;
@@ -57,7 +55,7 @@ function changeDirection(event) {
 
   //ArrowRight
   if (event.keyCode === 39) {
-    if (velocityX === -1) {
+    if (bodySquares[1][0] > snakeHeadX) {
       return;
     } else {
       velocityX = 1;
@@ -77,17 +75,14 @@ function checkForApple() {
     appleX = Math.floor(Math.random() * squareCount);
     appleY = Math.floor(Math.random() * squareCount);
 
-    // for (let i = 0; i < bodySquares.length; i++) {
-    //   while (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
-    //     for (let i = 0; i < bodySquares.length; i++) {
-    //       if (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
-    //         appleX = Math.floor(Math.random() * squareCount);
-    //         appleY = Math.floor(Math.random() * squareCount);
-    //       }
-    //     }
-    //   }
-    // }
-
+    // make sure that apple didn't spawn on a snake square
+    for (let i = 0; i < bodySquares.length; i++) {
+      if (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
+        appleX = Math.floor(Math.random() * squareCount);
+        appleY = Math.floor(Math.random() * squareCount);
+        i = 0;
+      }
+    }
     bodyLength += 5; //Adjustable?
   }
 }
@@ -102,7 +97,7 @@ function checkForCollision() {
     gameOver = true;
     console.log(gameOver);
   }
-  for (let i = 1; i < bodySquares.length; i++) {
+  for (let i = 2; i < bodySquares.length; i++) {
     if (snakeHeadX === bodySquares[i][0] && snakeHeadY === bodySquares[i][1]) {
       gameOver = true;
       console.log(gameOver);
@@ -111,7 +106,7 @@ function checkForCollision() {
 }
 
 const bodySquares = [];
-let bodyLength = 0;
+let bodyLength = 2;
 
 function renderNewFrame() {
   //clear the entire board

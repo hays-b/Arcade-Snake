@@ -1,60 +1,67 @@
 const board = document.getElementById("board");
+let resolution = 1000; //in pixels
+board.height = resolution;
+board.width = resolution;
+
 const boardCtx = board.getContext("2d");
 
-let score = 0
+let score = 0;
+let gameOver = false;
 
-let squareCount = 40; //Make adjustable in settings
+let squareCount = 31; //Change in settings
 let squareSize = board.width / squareCount;
 
-let snakeHeadX = board.width / 2;
-let snakeHeadY = board.width / 2;
+let snakeHeadX = Math.floor(squareCount / 2);
+let snakeHeadY = Math.floor(squareCount / 2);
+
+let appleX = Math.floor(squareCount / 2);
+let appleY = Math.floor(squareCount / 4);
 
 let velocityX = 0;
 let velocityY = 0;
 
-let appleX = board.width / 2;
-let appleY = board.width / 4;
-
 let snakeSpeed = 10; // also frames per second
 
 function changeDirection(event) {
+  //   let bodyX = bodySquares[0][0];
+  //   let bodyY = bodySquares[0][1];
+  //ArrowUp
   if (event.keyCode === 38) {
-    //ArrowUp
-    if (velocityY === squareSize) {
+    if (velocityY === 1) {
       return;
     } else {
-      velocityY = -squareSize;
       velocityX = 0;
+      velocityY = -1;
     }
   }
 
+  //ArrowDown
   if (event.keyCode === 40) {
-    //ArrowDown
-    if (velocityY === -squareSize) {
+    if (velocityY === -1) {
       return;
     } else {
-      velocityY = squareSize;
       velocityX = 0;
+      velocityY = 1;
     }
   }
 
+  //ArrowLeft
   if (event.keyCode === 37) {
-    //ArrowLeft
-    if (velocityX === squareSize) {
+    if (velocityX === 1) {
       return;
     } else {
+      velocityX = -1;
       velocityY = 0;
-      velocityX = -squareSize;
     }
   }
 
+  //ArrowRight
   if (event.keyCode === 39) {
-    //ArrowRight
-    if (velocityX === -squareSize) {
+    if (velocityX === -1) {
       return;
     } else {
+      velocityX = 1;
       velocityY = 0;
-      velocityX = squareSize;
     }
   }
 }
@@ -62,16 +69,49 @@ function changeDirection(event) {
 function moveSnake() {
   snakeHeadX += velocityX;
   snakeHeadY += velocityY;
-  console.log(snakeHeadX)
 }
 
 function checkForApple() {
-    if (snakeHeadX === appleX && snakeHeadY === appleY) {
-        score += 100
-        appleX = Math.floor(Math.random() * squareSize * squareCount)
-        appleY = Math.floor(Math.random() * squareSize * squareCount)
-    }
+  if (snakeHeadX === appleX && snakeHeadY === appleY) {
+    score += 100;
+    appleX = Math.floor(Math.random() * squareCount);
+    appleY = Math.floor(Math.random() * squareCount);
+
+    // for (let i = 0; i < bodySquares.length; i++) {
+    //   while (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
+    //     for (let i = 0; i < bodySquares.length; i++) {
+    //       if (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
+    //         appleX = Math.floor(Math.random() * squareCount);
+    //         appleY = Math.floor(Math.random() * squareCount);
+    //       }
+    //     }
+    //   }
+    // }
+
+    bodyLength += 5; //Adjustable?
+  }
 }
+
+function checkForCollision() {
+  if (
+    snakeHeadX < 0 ||
+    snakeHeadX >= squareCount ||
+    snakeHeadY < 0 ||
+    snakeHeadY >= squareCount
+  ) {
+    gameOver = true;
+    console.log(gameOver);
+  }
+  for (let i = 1; i < bodySquares.length; i++) {
+    if (snakeHeadX === bodySquares[i][0] && snakeHeadY === bodySquares[i][1]) {
+      gameOver = true;
+      console.log(gameOver);
+    }
+  }
+}
+
+const bodySquares = [];
+let bodyLength = 0;
 
 function renderNewFrame() {
   //clear the entire board
@@ -79,21 +119,58 @@ function renderNewFrame() {
   boardCtx.fillRect(0, 0, board.width, board.height);
 
   //render apple
-  boardCtx.fillStyle = "red";
-  boardCtx.fillRect(appleX, appleY, squareSize, squareSize);
-  console.log(appleX)
+  boardCtx.fillStyle = "white";
+  boardCtx.fillRect(
+    appleX * squareSize,
+    appleY * squareSize,
+    squareSize,
+    squareSize
+  );
 
   //render snake
   boardCtx.fillStyle = "lime";
-  boardCtx.fillRect(snakeHeadX, snakeHeadY, squareSize, squareSize);
+  boardCtx.fillRect(
+    snakeHeadX * squareSize,
+    snakeHeadY * squareSize,
+    squareSize - 2, // -2 to add some space between squares
+    squareSize - 2
+  );
+
+  //adds current head position to body array every frame
+  bodySquares.unshift([snakeHeadX, snakeHeadY]);
+
+  //takes away last body square every frame if length is too long
+  if (bodySquares.length > bodyLength) {
+    bodySquares.pop();
+  }
+
+  // colors in all of the snake squares in the array
+  boardCtx.fillStyle = "lime";
+  for (let i = 0; i < bodySquares.length; i++) {
+    boardCtx.fillRect(
+      bodySquares[i][0] * squareSize,
+      bodySquares[i][1] * squareSize,
+      squareSize - 2,
+      squareSize - 2
+    );
+  }
 }
 
+function displayScore() {
+  boardCtx.fillStyle = "lime";
+  boardCtx.font = "100px sans-serif";
+  boardCtx.fillText = ("score", 400, 10);
+}
 
 function newGameFrame() {
-    moveSnake();
-    checkForApple();
-    renderNewFrame();
-  // checkSnakeCollision()
+  checkForCollision();
+  if (gameOver === true) {
+    return;
+  }
+  moveSnake();
+  checkForApple();
+  renderNewFrame();
+  displayScore();
 }
 
 document.addEventListener("keydown", changeDirection);
@@ -103,20 +180,6 @@ setInterval(function () {
 }, 1000 / snakeSpeed);
 
 /*
-
-function checkAppleCollision () {
-    if (appleX === headX && appleY === headY) {
-        appleX = Math.floor(Math.random() * gridCount);
-        appleY = Math.floor(Math.random() * gridCount);
-
-        snake tail 
-    }
-}
-
-// setInterval(tick, 1000 / speed);
-
-
-
 
 
 // General Strategies 
@@ -152,10 +215,6 @@ function tick() {
   }
   
   setInterval(tick, 1000 / 30) // as close to 30 frames per second as possible
-  
-  // now you might have things like
-  document.addEventListener('keydown', function (event) {
-    // here you might read which key was pressed and update the state accordingly
 })
   
 

@@ -8,14 +8,13 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
-    /* background-color: black; */
-    background-color: white;
+    background-color: rgb(17, 17, 17);
 }
-/* #board {
+#board {
     margin: 2rem;
-    border: solid 1rem rgb(97, 38, 38);
+    padding: .1rem;
+    border: solid .5rem lime;
     width: 80vmin;
     height: 80vmin;
     display: flex; 
 }
-*/

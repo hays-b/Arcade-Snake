@@ -2,13 +2,21 @@ const board = document.getElementById("board");
 let resolution = 1000; //in pixels
 board.height = resolution;
 board.width = resolution;
-
 const boardCtx = board.getContext("2d");
+
+const scoreDisplay = document.createElement("div");
+document.body.appendChild(scoreDisplay);
+
+const playAgainDisplay = document.createElement("button");
+document.body.appendChild(playAgainDisplay);
+playAgainDisplay.innerText = `Play Again?`;
+playAgainDisplay.style.display = "none" //play again button is hidden by default
+
 
 let score = 0;
 let gameOver = false;
 
-let squareCount = 31; //Change in settings
+let squareCount = 31; //Adjustable
 let squareSize = board.width / squareCount;
 
 let snakeHeadX = Math.floor(squareCount / 2);
@@ -20,7 +28,11 @@ let appleY = Math.floor(squareCount / 4);
 let velocityX = 0;
 let velocityY = 0;
 
-let snakeSpeed = 10; // also frames per second
+let snakeSpeed = 10; // Adjustable
+
+let bodySquares = [];
+let bodyLength = 2;
+let numAddedForApple = 5 // Adjustable
 
 function changeDirection(event) {
   //ArrowUp
@@ -64,6 +76,8 @@ function changeDirection(event) {
   }
 }
 
+document.addEventListener("keydown", changeDirection);
+
 function moveSnake() {
   snakeHeadX += velocityX;
   snakeHeadY += velocityY;
@@ -71,58 +85,41 @@ function moveSnake() {
 
 function checkForApple() {
   if (snakeHeadX === appleX && snakeHeadY === appleY) {
-    score += 100;
+    score += numAddedForApple * 10;
     appleX = Math.floor(Math.random() * squareCount);
     appleY = Math.floor(Math.random() * squareCount);
 
     // make sure that apple didn't spawn on a snake square
     for (let i = 0; i < bodySquares.length; i++) {
       if (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
-        appleX = Math.floor(Math.random() * squareCount);
-        appleY = Math.floor(Math.random() * squareCount);
+        appleX = Math.floor(Math.random() * (squareCount + 0.9));
+        appleY = Math.floor(Math.random() * (squareCount + 0.9));
         i = 0;
       }
     }
-    bodyLength += 5; //Adjustable?
+    bodyLength += numAddedForApple
   }
 }
 
-function checkForCollision() {
-  if (
-    snakeHeadX < 0 ||
-    snakeHeadX >= squareCount ||
-    snakeHeadY < 0 ||
-    snakeHeadY >= squareCount
-  ) {
-    gameOver = true;
-    console.log(gameOver);
-  }
-  for (let i = 2; i < bodySquares.length; i++) {
-    if (snakeHeadX === bodySquares[i][0] && snakeHeadY === bodySquares[i][1]) {
-      gameOver = true;
-      console.log(gameOver);
-    }
-  }
+function displayScore() {
+  scoreDisplay.innerText = `Score: ${score}`;
 }
-
-const bodySquares = [];
-let bodyLength = 2;
 
 function renderNewFrame() {
-  //clear the entire board
+  //clear the entire board before before the next frame
   boardCtx.fillStyle = "black";
   boardCtx.fillRect(0, 0, board.width, board.height);
 
-  //render apple
+  //colors in apple square
   boardCtx.fillStyle = "white";
   boardCtx.fillRect(
     appleX * squareSize,
     appleY * squareSize,
-    squareSize,
-    squareSize
+    squareSize - 2,
+    squareSize - 2
   );
 
-  //render snake
+  //colors in snake head
   boardCtx.fillStyle = "lime";
   boardCtx.fillRect(
     snakeHeadX * squareSize,
@@ -131,7 +128,7 @@ function renderNewFrame() {
     squareSize - 2
   );
 
-  //adds current head position to body array every frame
+  //adds current head position to body array at [0] every frame
   bodySquares.unshift([snakeHeadX, snakeHeadY]);
 
   //takes away last body square every frame if length is too long
@@ -151,116 +148,60 @@ function renderNewFrame() {
   }
 }
 
-function displayScore() {
-  boardCtx.fillStyle = "lime";
-  boardCtx.font = "100px sans-serif";
-  boardCtx.fillText = ("score", 400, 10);
+function checkForCollision() {
+  //Check if snake hits a wall
+  if (
+    snakeHeadX < 0 ||
+    snakeHeadX >= squareCount ||
+    snakeHeadY < 0 ||
+    snakeHeadY >= squareCount
+  ) {
+    gameOver = true;
+  }
+
+  //Check if snakes hits itself
+  for (let i = 2; i < bodySquares.length; i++) {
+    if (snakeHeadX === bodySquares[i][0] && snakeHeadY === bodySquares[i][1]) {
+      gameOver = true;
+    }
+  }
 }
 
-function newGameFrame() {
-  checkForCollision();
+// game-over mechanics start here
+function playAgain() {
+  score = 0;
+
+  snakeHeadX = Math.floor(squareCount / 2);
+  snakeHeadY = Math.floor(squareCount / 2);
+
+  appleX = Math.floor(squareCount / 2);
+  appleY = Math.floor(squareCount / 4);
+
+  velocityX = 0;
+  velocityY = 0;
+
+  bodySquares = []
+  bodyLength = 2;
+
+  gameOver = false;
+  playAgainDisplay.style.display = "none"
+}
+
+playAgainDisplay.addEventListener("click", playAgain);
+
+
+//putting it all together now
+setInterval(function () {
+  if (gameOver === false) {
+    moveSnake();
+    checkForApple();
+    displayScore();
+    renderNewFrame();
+    checkForCollision();
+  }
+
   if (gameOver === true) {
+    playAgainDisplay.style.display = "inline-block"
     return;
   }
-  moveSnake();
-  checkForApple();
-  renderNewFrame();
-  displayScore();
-}
-
-document.addEventListener("keydown", changeDirection);
-
-setInterval(function () {
-  newGameFrame();
 }, 1000 / snakeSpeed);
-
-/*
-
-
-// General Strategies 
-
-// state
-let initialState;
-
-function buildInitialState() {
-
-}
-
-// render
-function renderState() {
-
-}
-
-// maybe a dozen or so helper functions for tiny pieces of the interface
-
-// listeners
-function onBoardClick() {
-  // update state, maybe with another dozen or so helper functions...
-
-  renderState() // show the user the new state
-}
-const board = document.getElementById('board');
-board.addEventListener('click', onBoardClick); // etc
-
-// add to above
-function tick() {
-    // this is an incremental change that happens to the state every time you update...
-  
-    renderState()
-  }
-  
-  setInterval(tick, 1000 / 30) // as close to 30 frames per second as possible
-})
-  
-
-
-// Game Strategies 
-
-let snake = {
-    body: [ [10, 5], [10, 6], [10, 7], [10, 8] ],
-    nextDirection: [1, 0]
-}
-
-let gameState = {
-    apple: [11, 8],
-    snake: snake // from above
-}
-
-let gameState = {
-    currentScore: 0,
-    goal: some very high number probably,
-    gameStatus: 'playing',
-}
-
-let freeSpace = any space that is not occupied by snake
-let tick = a length of time (adjust for speed and difficulty)
-let travelDistance = a relative measurement unit (something shorter than a grid block)
-
-function moveSnake(dist) {
-    add head to snake
-    remove tail from snake
-}
-
-add.eventListener to #board (keydown) {
-    set snake.nextDirection
-    If keydown is opposite of direction of snake {
-        break;
-    }
-}
-
-function tick () {
-    moveSnake(travelDistance)
-    if snakeHead is on apple, {
-        apple move to freeSpace
-        score goes up by num 
-        snake tail does not get removed for tick(num)
-    }
-    if snakeHead hits wall or himself {
-        gameState.gameStatus: 'game over
-        clearInterval
-        displays score
-    }
-    renderState()
-}
-
-*/

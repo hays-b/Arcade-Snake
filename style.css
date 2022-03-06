@@ -8,13 +8,42 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
+    
     background-color: rgb(17, 17, 17);
 }
 #board {
-    margin: 2rem;
-    padding: .1rem;
-    border: solid .5rem lime;
+    margin: 7vmin;
+    border: solid 1vmin lime;
+    border-radius: 2vmin;
+    outline-style: solid;
+    outline-color: black;
+    outline-width: 6vmin;
     width: 80vmin;
     height: 80vmin;
     display: flex; 
+}
+
+div {
+    position: fixed;
+    margin-top: 2.5vmin;
+    margin-bottom: 0;
+    color: lime;
+    font-family: monospace;
+    font-size: larger;
+    font-weight: bold;
+    font-size: 2.5vmin;
+}
+
+button {
+    position: absolute;
+    align-self: center;
+    padding: 2vmin;
+    border: solid 1vmin lime;
+    border-radius: 2vmin;
+    background-color: black;
+    color: white;
+    font-family: monospace;
+    font-size: larger;
+    font-weight: bold;
+    font-size: 2.5vmin;
 }

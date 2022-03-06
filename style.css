@@ -9,10 +9,10 @@ body {
     justify-content: center;
     align-content: center;
     
-    background-color: rgb(17, 17, 17);
+    background-color: rgb(23, 23, 27);
 }
 #board {
-    margin: 7vmin;
+    margin: 8vmin;
     border: solid 1vmin lime;
     border-radius: 2vmin;
     outline-style: solid;
@@ -25,7 +25,7 @@ body {
 
 div {
     position: fixed;
-    margin-top: 2.5vmin;
+    margin-top: 4vmin;
     margin-bottom: 0;
     color: lime;
     font-family: monospace;

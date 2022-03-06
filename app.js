@@ -3,15 +3,20 @@ let resolution = 1000; //in pixels
 board.height = resolution;
 board.width = resolution;
 const boardCtx = board.getContext("2d");
+boardCtx.fillStyle = "black";
+boardCtx.fillRect(0, 0, board.width, board.height);
 
 const scoreDisplay = document.createElement("div");
 document.body.appendChild(scoreDisplay);
 
 const playAgainDisplay = document.createElement("button");
 document.body.appendChild(playAgainDisplay);
-playAgainDisplay.innerText = `Play Again?`;
+playAgainDisplay.innerText = `PLAY AGAIN?`;
 playAgainDisplay.style.display = "none" //play again button is hidden by default
 
+const startGameDisplay = document.createElement("button");
+document.body.appendChild(startGameDisplay);
+startGameDisplay.innerText = `START GAME`;
 
 let score = 0;
 let gameOver = false;
@@ -85,11 +90,10 @@ function moveSnake() {
 
 function checkForApple() {
   if (snakeHeadX === appleX && snakeHeadY === appleY) {
-    score += numAddedForApple * 10;
     appleX = Math.floor(Math.random() * squareCount);
     appleY = Math.floor(Math.random() * squareCount);
 
-    // make sure that apple didn't spawn on a snake square
+    // make sure that apple doesn't spawn on a snake square
     for (let i = 0; i < bodySquares.length; i++) {
       if (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
         appleX = Math.floor(Math.random() * (squareCount + 0.9));
@@ -97,12 +101,14 @@ function checkForApple() {
         i = 0;
       }
     }
+
+    score += numAddedForApple * 10;
     bodyLength += numAddedForApple
   }
 }
 
 function displayScore() {
-  scoreDisplay.innerText = `Score: ${score}`;
+  scoreDisplay.innerText = `SCORE: ${score}`;
 }
 
 function renderNewFrame() {
@@ -191,7 +197,9 @@ playAgainDisplay.addEventListener("click", playAgain);
 
 
 //putting it all together now
-setInterval(function () {
+function playGame() {
+  startGameDisplay.style.display = "none"
+  setInterval(function () {
   if (gameOver === false) {
     moveSnake();
     checkForApple();
@@ -205,3 +213,6 @@ setInterval(function () {
     return;
   }
 }, 1000 / snakeSpeed);
+}
+
+startGameDisplay.addEventListener("click", playGame);

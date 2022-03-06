@@ -11,7 +11,7 @@ document.body.appendChild(scoreDisplay);
 
 const playAgainDisplay = document.createElement("button");
 document.body.appendChild(playAgainDisplay);
-playAgainDisplay.innerText = `PLAY AGAIN?`;
+playAgainDisplay.innerText = `PLAY AGAIN`;
 playAgainDisplay.style.display = "none" //play again button is hidden by default
 
 const startGameDisplay = document.createElement("button");

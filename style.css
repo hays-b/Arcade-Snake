@@ -8,8 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-content: center;
-    
-    background-color: rgb(23, 23, 27);
+    background-color: black;
 }
 #board {
     margin: 8vmin;

@@ -2,12 +2,19 @@ const board = document.getElementById("board");
 let resolution = 1000; //in pixels
 board.height = resolution;
 board.width = resolution;
+
 const boardCtx = board.getContext("2d");
 boardCtx.fillStyle = "black";
 boardCtx.fillRect(0, 0, board.width, board.height);
 
-const scoreDisplay = document.createElement("div");
-document.body.appendChild(scoreDisplay);
+const displayBox = document.createElement("div");
+document.body.appendChild(displayBox);
+
+const scoreDisplay = document.createElement("span");
+displayBox.appendChild(scoreDisplay);
+
+const highScoreDisplay = document.createElement("span");
+displayBox.appendChild(highScoreDisplay);
 
 const playAgainDisplay = document.createElement("button");
 document.body.appendChild(playAgainDisplay);
@@ -18,65 +25,70 @@ const startGameDisplay = document.createElement("button");
 document.body.appendChild(startGameDisplay);
 startGameDisplay.innerText = `START GAME`;
 
-let score = 0;
-let gameOver = false;
 
 let squareCount = 31; //Adjustable
 let squareSize = board.width / squareCount;
 
-let snakeHeadX = Math.floor(squareCount / 2);
-let snakeHeadY = Math.floor(squareCount / 2);
+let game = {
+  score: 0,
+  highScore: 0,
+  gameOver: false,
+  speed: 10, // Adjustable
+}
+let snake = {
+  headX: Math.floor(squareCount / 2),
+  headY: Math.floor(squareCount / 2),
+  velocityX: 0,
+  velocityY: 0,
+  body: [],
+  limit: 2
+}
+let apple = {
+  x: Math.floor(squareCount / 2),
+  y: Math.floor(squareCount / 4)
+}
 
-let appleX = Math.floor(squareCount / 2);
-let appleY = Math.floor(squareCount / 4);
-
-let velocityX = 0;
-let velocityY = 0;
-
-let snakeSpeed = 10; // Adjustable
-
-let bodySquares = [];
-let bodyLength = 2;
 let numAddedForApple = 5 // Adjustable
+
 
 function changeDirection(event) {
   //ArrowUp
   if (event.keyCode === 38) {
-    if (bodySquares[1][1] < snakeHeadY) {
+    if (snake.body[1][1] < snake.headY) {
       return;
     } else {
-      velocityX = 0;
-      velocityY = -1;
+      snake.velocityX = 0;
+      snake.velocityY = -1;
     }
   }
 
   //ArrowDown
   if (event.keyCode === 40) {
-    if (bodySquares[1][1] > snakeHeadY) {
+    if (snake.body[1][1] > snake.headY) {
       return;
     } else {
-      velocityX = 0;
-      velocityY = 1;
+      snake.velocityX = 0;
+      snake.velocityY = 1;
     }
   }
 
   //ArrowLeft
   if (event.keyCode === 37) {
-    if (bodySquares[1][0] < snakeHeadX) {
+    if (snake.body[1][0] < snake.headX) {
       return;
     } else {
-      velocityX = -1;
-      velocityY = 0;
+      snake.velocityX = -1;
+      snake.velocityY = 0;
     }
   }
 
   //ArrowRight
   if (event.keyCode === 39) {
-    if (bodySquares[1][0] > snakeHeadX) {
+    if (snake.body[1][0] > snake.headX) {
       return;
     } else {
-      velocityX = 1;
-      velocityY = 0;
+      snake.velocityX = 1;
+      snake.velocityY = 0;
     }
   }
 }
@@ -84,31 +96,36 @@ function changeDirection(event) {
 document.addEventListener("keydown", changeDirection);
 
 function moveSnake() {
-  snakeHeadX += velocityX;
-  snakeHeadY += velocityY;
+  snake.headX += snake.velocityX;
+  snake.headY += snake.velocityY;
 }
 
 function checkForApple() {
-  if (snakeHeadX === appleX && snakeHeadY === appleY) {
-    appleX = Math.floor(Math.random() * squareCount);
-    appleY = Math.floor(Math.random() * squareCount);
+  if (snake.headX === apple.x && snake.headY === apple.y) {
+    apple.x = Math.floor(Math.random() * squareCount);
+    apple.y = Math.floor(Math.random() * squareCount);
 
     // make sure that apple doesn't spawn on a snake square
-    for (let i = 0; i < bodySquares.length; i++) {
-      if (appleX === bodySquares[i][0] && appleY === bodySquares[i][1]) {
-        appleX = Math.floor(Math.random() * (squareCount + 0.9));
-        appleY = Math.floor(Math.random() * (squareCount + 0.9));
+    for (let i = 0; i < snake.body.length; i++) {
+      if (apple.x === snake.body[i][0] && apple.y === snake.body[i][1]) {
+        apple.x = Math.floor(Math.random() * (squareCount + 0.9));
+        apple.y = Math.floor(Math.random() * (squareCount + 0.9));
         i = 0;
       }
     }
 
-    score += numAddedForApple * 10;
-    bodyLength += numAddedForApple
+    game.score += numAddedForApple * 10;
+    snake.limit += numAddedForApple
   }
 }
 
 function displayScore() {
-  scoreDisplay.innerText = `SCORE: ${score}`;
+  scoreDisplay.innerText = `SCORE: ${game.score}`;
+
+  if (game.highScore < game.score) {
+    game.highScore = game.score
+  }
+  highScoreDisplay.innerText = `HIGH SCORE: ${game.highScore}`
 }
 
 function renderNewFrame() {
@@ -119,8 +136,8 @@ function renderNewFrame() {
   //colors in apple square
   boardCtx.fillStyle = "white";
   boardCtx.fillRect(
-    appleX * squareSize,
-    appleY * squareSize,
+    apple.x * squareSize,
+    apple.y * squareSize,
     squareSize - 2,
     squareSize - 2
   );
@@ -128,26 +145,26 @@ function renderNewFrame() {
   //colors in snake head
   boardCtx.fillStyle = "lime";
   boardCtx.fillRect(
-    snakeHeadX * squareSize,
-    snakeHeadY * squareSize,
+    snake.headX * squareSize,
+    snake.headY * squareSize,
     squareSize - 2, // -2 to add some space between squares
     squareSize - 2
   );
 
   //adds current head position to body array at [0] every frame
-  bodySquares.unshift([snakeHeadX, snakeHeadY]);
+  snake.body.unshift([snake.headX, snake.headY]);
 
   //takes away last body square every frame if length is too long
-  if (bodySquares.length > bodyLength) {
-    bodySquares.pop();
+  if (snake.body.length > snake.limit) {
+    snake.body.pop();
   }
 
   // colors in all of the snake squares in the array
   boardCtx.fillStyle = "lime";
-  for (let i = 0; i < bodySquares.length; i++) {
+  for (let i = 0; i < snake.body.length; i++) {
     boardCtx.fillRect(
-      bodySquares[i][0] * squareSize,
-      bodySquares[i][1] * squareSize,
+      snake.body[i][0] * squareSize,
+      snake.body[i][1] * squareSize,
       squareSize - 2,
       squareSize - 2
     );
@@ -157,50 +174,49 @@ function renderNewFrame() {
 function checkForCollision() {
   //Check if snake hits a wall
   if (
-    snakeHeadX < 0 ||
-    snakeHeadX >= squareCount ||
-    snakeHeadY < 0 ||
-    snakeHeadY >= squareCount
+    snake.headX < 0 ||
+    snake.headX >= squareCount ||
+    snake.headY < 0 ||
+    snake.headY >= squareCount
   ) {
-    gameOver = true;
+    game.gameOver = true;
   }
 
   //Check if snakes hits itself
-  for (let i = 2; i < bodySquares.length; i++) {
-    if (snakeHeadX === bodySquares[i][0] && snakeHeadY === bodySquares[i][1]) {
-      gameOver = true;
+  for (let i = 2; i < snake.body.length; i++) {
+    if (snake.headX === snake.body[i][0] && snake.headY === snake.body[i][1]) {
+      game.gameOver = true;
     }
   }
 }
 
-// game-over mechanics start here
 function playAgain() {
-  score = 0;
+  game.score = 0;
 
-  snakeHeadX = Math.floor(squareCount / 2);
-  snakeHeadY = Math.floor(squareCount / 2);
+  snake.headX = Math.floor(squareCount / 2);
+  snake.headY = Math.floor(squareCount / 2);
 
-  appleX = Math.floor(squareCount / 2);
-  appleY = Math.floor(squareCount / 4);
+  apple.x = Math.floor(squareCount / 2);
+  apple.y = Math.floor(squareCount / 4);
 
-  velocityX = 0;
-  velocityY = 0;
+  snake.velocityX = 0;
+  snake.velocityY = 0;
 
-  bodySquares = []
-  bodyLength = 2;
+  snake.body = []
+  snake.limit = 2;
 
-  gameOver = false;
+  game.gameOver = false;
   playAgainDisplay.style.display = "none"
 }
 
 playAgainDisplay.addEventListener("click", playAgain);
 
 
-//putting it all together now
+//putting it all together
 function playGame() {
   startGameDisplay.style.display = "none"
   setInterval(function () {
-  if (gameOver === false) {
+  if (game.gameOver === false) {
     moveSnake();
     checkForApple();
     displayScore();
@@ -208,11 +224,11 @@ function playGame() {
     checkForCollision();
   }
 
-  if (gameOver === true) {
+  if (game.gameOver === true) {
     playAgainDisplay.style.display = "inline-block"
     return;
   }
-}, 1000 / snakeSpeed);
+}, 1000 / game.speed);
 }
 
 startGameDisplay.addEventListener("click", playGame);

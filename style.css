@@ -12,6 +12,7 @@ body {
 }
 #board {
     margin: 8vmin;
+    padding: .2vmin 0 0 .2vmin;
     border: solid 1vmin lime;
     border-radius: 2vmin;
     outline-style: solid;
@@ -23,9 +24,17 @@ body {
 }
 
 div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     position: fixed;
     margin-top: 4vmin;
     margin-bottom: 0;
+    width: 80vmin;
+    
+}
+
+span {
     color: lime;
     font-family: monospace;
     font-size: larger;

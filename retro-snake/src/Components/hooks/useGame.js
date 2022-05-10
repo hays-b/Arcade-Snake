@@ -1,15 +1,39 @@
+import React, { useContext } from "react";
 import { GameContext } from "../context/GameContext";
-import { useContext } from "react";
 
 const useGame = () => {
   const {
       gameState,
       setGameState,
+      boardState,
+      setBoardState,
+      boardCtx,
+      setBoardCtx,
+      squareCount,
+      setSquareCount,
+      squareSize,
+      setSquareSize,
+      snake,
+      setSnake,
+      apple,
+      setApple,
   } = useContext(GameContext);
 
   return {
     gameState,
     setGameState,
+    boardState,
+    setBoardState,
+    boardCtx,
+      setBoardCtx,
+    squareCount,
+    setSquareCount,
+    squareSize,
+    setSquareSize,
+    snake,
+    setSnake,
+    apple,
+    setApple,
   };
 };
 

@@ -7,6 +7,7 @@ const ScoreDisplay = () => {
   return (
     <div>
       <div>{gameState.score}</div>
+      <div>{gameState.highScore}</div>
     </div>
   );
 };

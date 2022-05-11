@@ -5,6 +5,7 @@ import {
   renderNewFrame,
   checkForApple,
   checkForCollision,
+  updateScore,
 } from "./helperFunctions";
 // import {
 // something
@@ -14,40 +15,50 @@ export const GameContext = React.createContext();
 
 const GameProvider = ({ children }) => {
   const [boardState, setBoardState] = useState({
-    resolution: "500", //needed in component
-    ctx: null, //needed in component
+    resolution: "500", // pixels
+    ctx: null,
     tileCount: 31, // adjustable
-  }); //us
+  });
 
   const [gameState, setGameState] = useState({
     score: 0,
     highScore: 0,
     gameOver: true,
-    speed: 8, // Adjustable
+    speed: 10, // Adjustable
   });
 
   let gameInterval;
 
   useEffect(() => {
     if (!gameState.gameOver) {
+        // reset all game values
       initializeGame(boardState);
+      // start game interval
       gameInterval = setInterval(() => {
         if (!gameState.gameOver) {
-          console.log("are we here?", gameState);
+            console.log()
           moveSnake();
+          // update useStates if an apple is hit
           if (checkForApple()) {
-            setGameState({ ...gameState, score: gameState.score + 10 });
+            setGameState({ ...gameState, score: updateScore() });
           }
-          //   displayScore();
           renderNewFrame();
           if (checkForCollision()) {
-              setGameState({ ...gameState, gameOver: true });
+              // clear interval and update all states
               clearInterval(gameInterval);
-            // return;
+              setGameState({
+                ...gameState,
+                score: updateScore(),
+                gameOver: true,
+              });
           }
         }
       }, 1000 / gameState.speed);
     }
+    // update highScore if necessary
+    if (gameState.score > gameState.highScore) {
+        setGameState({ ...gameState, highScore: updateScore() });
+      }
   }, [gameState.gameOver]);
 
   return (

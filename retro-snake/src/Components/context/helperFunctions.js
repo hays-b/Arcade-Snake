@@ -1,4 +1,4 @@
-let squareSize, squareCount, boardCtx;
+let squareSize, squareCount, boardCtx, score;
 
 const snake = {
   x: 0,
@@ -19,6 +19,7 @@ const velocity = {
 
 export const initializeGame = (boardState) => {
   console.log('boardState')
+  score = 0
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;
   squareSize = boardState.resolution / squareCount;
@@ -100,18 +101,15 @@ export const checkForApple = () => {
       }
     }
 
+    score += 10
     snake.limit += 1;
+    return true
   }
 };
 
-//   function displayScore() {
-//     scoreDisplay.innerText = `SCORE: ${game.score}`;
-
-//     if (game.highScore < game.score) {
-//       game.highScore = game.score
-//     }
-//     highScoreDisplay.innerText = `HIGH SCORE: ${game.highScore}`
-//   }
+export const updateScore = () => {
+  return score
+  }
 
 export const renderNewFrame = () => {
   //clear the entire board before before the next frame

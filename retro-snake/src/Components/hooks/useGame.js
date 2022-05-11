@@ -3,37 +3,25 @@ import { GameContext } from "../context/GameContext";
 
 const useGame = () => {
   const {
-      gameState,
-      setGameState,
-      boardState,
-      setBoardState,
-      boardCtx,
-      setBoardCtx,
-      squareCount,
-      setSquareCount,
-      squareSize,
-      setSquareSize,
-      snake,
-      setSnake,
-      apple,
-      setApple,
+    boardState,
+    setBoardState,
+    gameState,
+    setGameState,
+    velocity,
+    setVelocity,
+    playGame, 
+    // changeDirection,
   } = useContext(GameContext);
 
   return {
-    gameState,
-    setGameState,
     boardState,
     setBoardState,
-    boardCtx,
-      setBoardCtx,
-    squareCount,
-    setSquareCount,
-    squareSize,
-    setSquareSize,
-    snake,
-    setSnake,
-    apple,
-    setApple,
+    gameState,
+    setGameState,
+    velocity,
+    setVelocity,
+    playGame, 
+    // changeDirection,
   };
 };
 

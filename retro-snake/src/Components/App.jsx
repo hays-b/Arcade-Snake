@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <GameProvider>
-        <StartGame />
+        {/* <StartGame /> */}
         <ScoreDisplay />
         <PlayAgain />
         <Board />

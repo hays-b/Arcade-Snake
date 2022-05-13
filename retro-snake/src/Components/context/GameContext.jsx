@@ -6,6 +6,7 @@ import {
   checkForApple,
   checkForCollision,
   updateScore,
+  changeDirection,
 } from "./helperFunctions";
 // import {
 // something
@@ -17,7 +18,7 @@ const GameProvider = ({ children }) => {
   const [boardState, setBoardState] = useState({
     resolution: "500", // pixels
     ctx: null,
-    tileCount: 31, // adjustable
+    tileCount: 21, // adjustable
   });
 
   const [gameState, setGameState] = useState({
@@ -28,6 +29,14 @@ const GameProvider = ({ children }) => {
   });
 
   let gameInterval;
+
+//   useEffect(() => {
+//     const keyPressHandler = (e) => {
+//         changeDirection(e, gameState)
+//       };
+//       document.addEventListener('keydown', keyPressHandler)
+
+//   }, [])
 
   useEffect(() => {
     if (!gameState.gameOver) {
@@ -44,7 +53,7 @@ const GameProvider = ({ children }) => {
           }
           renderNewFrame();
           if (checkForCollision()) {
-              // clear interval and update all states
+              // clear interval and update states
               clearInterval(gameInterval);
               setGameState({
                 ...gameState,

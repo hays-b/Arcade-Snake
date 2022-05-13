@@ -1,0 +1,81 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+  display: flex; 
+  justify-content: center;
+  align-content: center;
+  /* background-color: black; */
+  border: solid .5vmin black;
+}
+
+
+.main {
+  padding: 5vmin;
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: solid .5vmin black;
+  /* background-color: black; */
+}
+
+#board {
+  /* margin: 8vmin; */
+  justify-self: center;
+  align-self: center;
+  padding: 0.25vmin 0 0 0.25vmin;
+  border: solid 1vmin lime;
+  border-radius: .5vmin;
+  outline-style: solid;
+  outline-color: black;
+  outline-width: 5vmin;
+  width: 60vmin;
+  height: 60vmin;
+}
+
+.score-container {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 64vmin;
+  width: 60vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.score {
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.75vmin;
+}
+
+.play-again-container {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 0;
+  width: 50vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.play-again {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin: 3vmin;
+  padding: 2vmin;
+  border: solid .75vmin lime;
+  border-radius: .5vmin;
+  background-color: black;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 2.5vmin;
+}

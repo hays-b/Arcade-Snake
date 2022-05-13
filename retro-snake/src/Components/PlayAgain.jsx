@@ -2,34 +2,26 @@ import React from "react";
 import useGame from "./hooks/useGame";
 
 const PlayAgain = () => {
-  const { boardState, gameState, setGameState, playGame } = useGame();
-
-//   const handlePlayAgain = () => {
-//     setGameState({ ...gameState, score: 0, gameOver: false });
-//     playGame();
-//   };
+  const { gameState, setGameState } = useGame();
 
   return (
-    <>
-      {/* {gameState.gameOver ? ( */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setGameState({ ...gameState, score: 0, gameOver: false });
-        //   playGame();
-        }}
-      >
-        Play Again
-      </button>
-      {/* ) : (
-        // <button
-          onClick={(e) => {
-            e.preventDefault();
-            setGameState({ ...gameState, gameOver: true });
-          }}
-        >End Game</button>
-      )} */}
-    </>
+      <div className="play-again-container">
+    <button
+      className="play-again"
+      onClick={(e) => {
+        e.preventDefault();
+        setGameState({ ...gameState, score: 0, gameOver: false });
+      }}
+    >
+      Play Again
+    </button>
+    <button
+      className="play-again"
+    >
+      Menu
+    </button>
+
+    </div>
   );
 };
 

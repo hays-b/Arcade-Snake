@@ -1,19 +1,12 @@
 import "../style/App.css";
 import GameProvider from "./context/GameContext";
-import Board from "./Board";
-import PlayAgain from "./PlayAgain";
-import ScoreDisplay from "./ScoreDisplay";
-import StartGame from "./StartGame";
+import Main from "./Main";
 
 function App() {
-
   return (
-    <div className="App">
+    <div className="app">
       <GameProvider>
-        {/* <StartGame /> */}
-        <ScoreDisplay />
-        <PlayAgain />
-        <Board />
+        <Main />
       </GameProvider>
     </div>
   );

@@ -18,8 +18,8 @@ const velocity = {
 };
 
 export const initializeGame = (boardState) => {
-  console.log('boardState')
-  score = 0
+  console.log("boardState");
+  score = 0;
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;
   squareSize = boardState.resolution / squareCount;
@@ -39,47 +39,47 @@ export const initializeGame = (boardState) => {
 
 export const changeDirection = (event, gameState) => {
   if (!gameState.gameOver) {
-  //ArrowUp
-  if (event.keyCode === 38) {
-    if (snake.body[1][1] < snake.y) {
-      return;
-    } else {
-      velocity.x = 0;
-      velocity.y = -1;
+    //ArrowUp
+    if (event.keyCode === 38) {
+      if (snake.body[1][1] < snake.y) {
+        return;
+      } else {
+        velocity.x = 0;
+        velocity.y = -1;
+      }
     }
-  }
 
-  //ArrowDown
-  if (event.keyCode === 40) {
-    if (snake.body[1][1] > snake.y) {
-      return;
-    } else {
-      velocity.x = 0;
-      velocity.y = 1;
+    //ArrowDown
+    if (event.keyCode === 40) {
+      if (snake.body[1][1] > snake.y) {
+        return;
+      } else {
+        velocity.x = 0;
+        velocity.y = 1;
+      }
     }
-  }
 
-  //ArrowLeft
-  if (event.keyCode === 37) {
-    if (snake.body[1][0] < snake.x) {
-      return;
-    } else {
-      velocity.x = -1;
-      velocity.y = 0;
+    //ArrowLeft
+    if (event.keyCode === 37) {
+      if (snake.body[1][0] < snake.x) {
+        return;
+      } else {
+        velocity.x = -1;
+        velocity.y = 0;
+      }
     }
-  }
 
-  //ArrowRight
-  if (event.keyCode === 39) {
-    if (snake.body[1][0] > snake.x) {
-      return;
-    } else {
-      velocity.x = 1;
-      velocity.y = 0;
+    //ArrowRight
+    if (event.keyCode === 39) {
+      if (snake.body[1][0] > snake.x) {
+        return;
+      } else {
+        velocity.x = 1;
+        velocity.y = 0;
+      }
     }
+    console.log(event.keyCode, velocity.x, velocity.y);
   }
-}
-  console.log(event.keyCode, velocity.x, velocity.y)
 };
 
 export const moveSnake = () => {
@@ -101,15 +101,15 @@ export const checkForApple = () => {
       }
     }
 
-    score += 10
+    score += 10;
     snake.limit += 1;
-    return true
+    return true;
   }
 };
 
 export const updateScore = () => {
-  return score
-  }
+  return score;
+};
 
 export const renderNewFrame = () => {
   //clear the entire board before before the next frame
@@ -152,7 +152,7 @@ export const renderNewFrame = () => {
       squareSize - 2
     );
   }
-  console.log(snake.body)
+  // console.log(snake.body)
 };
 
 export const checkForCollision = () => {
@@ -169,7 +169,7 @@ export const checkForCollision = () => {
   // Check if snakes hits itself
   for (let i = 2; i < snake.body.length; i++) {
     if (snake.x === snake.body[i][0] && snake.y === snake.body[i][1]) {
-      return true
+      return true;
     }
   }
   return false;

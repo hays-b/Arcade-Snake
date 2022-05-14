@@ -8,9 +8,7 @@ import {
   updateScore,
   changeDirection,
 } from "./helperFunctions";
-// import {
-// something
-// } from '../../axios-services';
+import { getAllScores } from "../../axios-services";
 
 export const GameContext = React.createContext();
 
@@ -18,34 +16,44 @@ const GameProvider = ({ children }) => {
   const [boardState, setBoardState] = useState({
     resolution: "500", // pixels
     ctx: null,
-    tileCount: 21, // adjustable
+    tileCount: 25, // adjustable
   });
 
   const [gameState, setGameState] = useState({
     score: 0,
     highScore: 0,
     gameOver: true,
+    menu: true,
     speed: 10, // Adjustable
   });
 
-  let gameInterval;
+  const [highScores, setHighScores] = useState([]);
 
-//   useEffect(() => {
-//     const keyPressHandler = (e) => {
-//         changeDirection(e, gameState)
-//       };
-//       document.addEventListener('keydown', keyPressHandler)
+  // get highscores
+  useEffect(() => {
+    const displayAllScores = async () => {
+      const data = await getAllScores();
+      setHighScores(data);
+    };
+    displayAllScores();
+  }, []);
 
-//   }, [])
+  //   useEffect(() => {
+  //     const keyPressHandler = (e) => {
+  //         changeDirection(e, gameState)
+  //       };
+  //       document.addEventListener('keydown', keyPressHandler)
+
+  //   }, [])
 
   useEffect(() => {
     if (!gameState.gameOver) {
-        // reset all game values
-      initializeGame(boardState);
+      // reset all game values
+      initializeGame(boardState, gameState);
       // start game interval
-      gameInterval = setInterval(() => {
+      const gameInterval = setInterval(() => {
         if (!gameState.gameOver) {
-            console.log()
+          console.log();
           moveSnake();
           // update useStates if an apple is hit
           if (checkForApple()) {
@@ -53,21 +61,21 @@ const GameProvider = ({ children }) => {
           }
           renderNewFrame();
           if (checkForCollision()) {
-              // clear interval and update states
-              clearInterval(gameInterval);
-              setGameState({
-                ...gameState,
-                score: updateScore(),
-                gameOver: true,
-              });
+            // clear interval and update states
+            clearInterval(gameInterval);
+            setGameState({
+              ...gameState,
+              score: updateScore(),
+              gameOver: true,
+            });
           }
         }
       }, 1000 / gameState.speed);
     }
     // update highScore if necessary
     if (gameState.score > gameState.highScore) {
-        setGameState({ ...gameState, highScore: updateScore() });
-      }
+      setGameState({ ...gameState, highScore: updateScore() });
+    }
   }, [gameState.gameOver]);
 
   return (
@@ -77,8 +85,8 @@ const GameProvider = ({ children }) => {
         setBoardState,
         gameState,
         setGameState,
-        // playGame,
-        // changeDirection,
+        highScores,
+        setHighScores,
       }}
     >
       {children}

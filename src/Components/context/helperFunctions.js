@@ -18,7 +18,6 @@ const velocity = {
 };
 
 export const initializeGame = (boardState) => {
-  console.log("boardState");
   score = 0;
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;

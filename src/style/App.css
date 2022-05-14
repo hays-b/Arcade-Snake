@@ -79,3 +79,30 @@
   font-weight: bold;
   font-size: 2.5vmin;
 }
+
+.high-scores-title {
+  align-self: center;
+  justify-self: center;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 3vmin;
+}
+
+.highscores {
+  align-self: center;
+  justify-self: center;
+  margin: 3vmin;
+  padding: 2vmin;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.score-row {
+  /* margin: 1rem; */
+  padding: 1vmin 7vmin;
+}

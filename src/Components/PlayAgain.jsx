@@ -2,7 +2,7 @@ import React from "react";
 import useGame from "./hooks/useGame";
 
 const PlayAgain = () => {
-  const { gameState, setGameState } = useGame();
+  const { boardState, gameState, setGameState } = useGame();
 
   return (
       <div className="play-again-container">
@@ -13,12 +13,18 @@ const PlayAgain = () => {
         setGameState({ ...gameState, score: 0, gameOver: false });
       }}
     >
-      Play Again
+      PLAY AGAIN
     </button>
     <button
       className="play-again"
+      onClick={(e) => {
+        e.preventDefault();
+        setGameState({ ...gameState, score: 0, menu: true });
+        boardState.ctx.fillStyle = "black";
+        boardState.ctx.fillRect(0, 0, board.width, board.height);
+      }}
     >
-      Menu
+      MENU
     </button>
 
     </div>

@@ -80,6 +80,91 @@
   font-size: 2.5vmin;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+.settings-cog-container {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  margin: 0 0 50vmin 50vmin;
+  width: 10vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.settings-cog {
+  width: 7vmin;
+  height: 7vmin;
+  align-self: center;
+  justify-self: center;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1vmin;
+}
+
+.back-button-container {
+  align-self: center;
+  justify-self: center;
+  width: 50vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.settings-cog:hover {
+  cursor: pointer;
+}
+
+.settings-title {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin-top: 3vmin;
+  padding: 1vmin;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.settings-row {
+  align-self: center;
+  justify-self: center;
+  width: 50vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.settings-btn {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin: .5vmin;
+  padding: 2vmin;
+  border: solid .75vmin lime;
+  border-radius: .5vmin;
+  background-color: black;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.selected{
+  background-color: lime;
+  color: black;
+  border: solid .75vmin black;
+}
+
 .high-scores-title {
   align-self: center;
   justify-self: center;

@@ -1,21 +1,25 @@
 import useGame from "./hooks/useGame";
 import Board from "./Board";
 import PlayAgain from "./PlayAgain";
-import StartGame from "./StartGame";
+import Menu from "./Menu";
 import ScoreDisplay from "./ScoreDisplay";
+import Settings from "./Settings";
+import NewHighScore from "./NewHighScore";
 
 function Main() {
-  const { gameState } = useGame();
+  const { gameState, route } = useGame();
 
   return (
     <div className="main">
-      {gameState.menu ? (
-        <StartGame />
-      ) : (
+      {route === 'menu' ? <Menu />: null}
+      {route === 'settings' ? <Settings />: null}
+      {route === 'game' ?
         <>
           {gameState.gameOver ? <PlayAgain /> : null}
+          {gameState.newHighScore && gameState.gameOver ? <NewHighScore /> : null}
         </>
-      )}
+        : null
+      }
     {/* Board is always visible. It's just in the background if not being played */}
       <ScoreDisplay />
       <Board />

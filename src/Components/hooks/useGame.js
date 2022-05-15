@@ -9,6 +9,8 @@ const useGame = () => {
     setGameState,
     highScores,
     setHighScores,
+    route,
+    setRoute,
   } = useContext(GameContext);
 
   return {
@@ -18,6 +20,8 @@ const useGame = () => {
     setGameState,
     highScores,
     setHighScores,
+    route,
+    setRoute,
   };
 };
 

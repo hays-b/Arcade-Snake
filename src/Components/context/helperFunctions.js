@@ -5,6 +5,7 @@ const snake = {
   x: 0,
   body: [],
   limit: 2,
+  limitAddedForApple: 1,
 };
 
 const apple = {
@@ -17,7 +18,9 @@ const velocity = {
   y: 0,
 };
 
-export const initializeGame = (boardState) => {
+const boardArr = []
+
+export const initializeGame = (boardState, gameState) => {
   score = 0;
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;
@@ -34,6 +37,14 @@ export const initializeGame = (boardState) => {
 
   snake.body = [];
   snake.limit = 2;
+  snake.limitAddedForApple = gameState.numAddedForApple;
+  // make an array of the board coordinates to check later
+  for (let x = 0; x < squareCount; x++) {
+    for (let y = 0; y < squareCount; y++) {
+      boardArr.push([x, y])
+    }
+  }
+  console.log(boardArr)
 };
 
 export const changeDirection = (event, gameState) => {
@@ -87,9 +98,17 @@ export const moveSnake = () => {
 };
 
 export const checkForApple = () => {
+
   if (snake.x === apple.x && snake.y === apple.y) {
     apple.x = Math.floor(Math.random() * squareCount);
     apple.y = Math.floor(Math.random() * squareCount);
+
+    //<<<<<---------- testing --------->>>>>
+    // const unusedTiles = []
+    // for (let i = 0; i < boardArr.length; i++) {
+    //   boardArr.filter
+    // }
+    //<<<<<---------- testing --------->>>>>
 
     // make sure that apple doesn't spawn on a snake square
     for (let i = 0; i < snake.body.length; i++) {
@@ -101,7 +120,7 @@ export const checkForApple = () => {
     }
 
     score += 10;
-    snake.limit += 1;
+    snake.limit += snake.limitAddedForApple;
     return true;
   }
 };

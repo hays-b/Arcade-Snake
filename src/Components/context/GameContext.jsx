@@ -25,11 +25,11 @@ const GameProvider = ({ children }) => {
     gameOver: true,
     speed: 10, // Adjustable
     numAddedForApple: 1,
-    newHighScore: false,
   });
 
   // this will act as react-router routes. But I don't want the url to change
   const [route, setRoute] = useState("menu");
+  const [newHighScore, setNewHighScore] = useState(false)
 
   const [highScores, setHighScores] = useState([]);
 
@@ -84,14 +84,13 @@ const GameProvider = ({ children }) => {
 
     // update highScore if necessary
     if (isDefault) {
-      if (gameState.score > gameState.highScore) {
-      setGameState({ ...gameState, highScore: updateScore() });
-    }
     if (Array.isArray(highScores) && highScores.length) {
-      console.log(highScores[9].score)
-      // if (gameState.score > highScores[9].score) {
-        setGameState({ ...gameState, newHighScore: true });
-      // }
+      if (gameState.score > highScores[9].score) {
+        setNewHighScore(true);
+      }
+    }
+    if (gameState.score > gameState.highScore) {
+      setGameState({ ...gameState, highScore: updateScore() });
     }
   }
   }, [gameState.gameOver]);
@@ -107,6 +106,8 @@ const GameProvider = ({ children }) => {
         setHighScores,
         route,
         setRoute,
+        newHighScore,
+        setNewHighScore
       }}
     >
       {children}

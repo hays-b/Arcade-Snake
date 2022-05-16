@@ -5,7 +5,7 @@
   justify-content: center;
   align-content: center;
   /* background-color: black; */
-  border: solid .5vmin black;
+  border: .5vmin solid black;
 }
 
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  border: solid .5vmin black;
+  border: .5vmin solid black;
   /* background-color: black; */
 }
 
@@ -25,7 +25,7 @@
   justify-self: center;
   align-self: center;
   padding: 0.25vmin 0 0 0.25vmin;
-  border: solid 1vmin lime;
+  border: 1vmin solid lime;
   border-radius: .5vmin;
   outline-style: solid;
   outline-color: black;
@@ -34,6 +34,7 @@
   height: 60vmin;
 }
 
+/* -------------------------- Scores at the top -------------------------- */
 .score-container {
   position: absolute;
   align-self: center;
@@ -53,6 +54,103 @@
   font-size: 1.75vmin;
 }
 
+/* -------------------------- New HighScore pop-up -------------------------- */
+.new-highscore-container {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 30vmin;
+  width: 60vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.new-highscore-form {
+  align-self: center;
+  justify-self: center;
+  margin: 2vmin;
+  padding: 2vmin;
+  border: .75vmin solid orange;
+  border-radius: .5vmin;
+  background-color: black;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 2.5vmin;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-highscore-title {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 3.5vmin;
+}
+
+.new-highscore-text {
+  align-self: center;
+  justify-self: center;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+input {
+  text-align: center;
+  padding: .5vmin;
+  width: 10vmin;
+  /* border: .75vmin solid orange; */
+  border: none;
+  border-bottom: .75vmin solid orange;
+  /* border-radius: .5vmin; */
+  background-color: black;
+  color: red;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 2.5vmin;
+}
+input:focus {
+  outline: none;
+}
+
+.new-highscore-submit {
+  align-self: center;
+  justify-self: center;
+  margin: 1vmin;
+  padding: 1vmin;
+  border: solid .75vmin orange;
+  border-radius: .5vmin;
+  background-color: black;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.new-highscore-submit:hover {
+  border: solid .75vmin white;
+  background-color: orange;
+  color: white;
+}
+
+/* -------------------------- Play again pop-up -------------------------- */
 .play-again-container {
   position: absolute;
   align-self: center;
@@ -62,6 +160,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.play-again-conditional {
+  margin-top: 20vmin;
 }
 
 .play-again {
@@ -80,10 +182,18 @@
   font-size: 2.5vmin;
 }
 
+.play-again:hover {
+  border: solid .75vmin green;
+  background-color: lime;
+  color: white;
+}
+
 button:hover {
   cursor: pointer;
 }
 
+
+/* -------------------------- Settings cog -------------------------- */
 .settings-cog-container {
   position: absolute;
   align-self: center;
@@ -108,6 +218,31 @@ button:hover {
   font-size: 1vmin;
 }
 
+/* -------------------------- Menu -------------------------- */
+.start-game {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin: 3vmin;
+  padding: 2.5vmin;
+  border: solid .75vmin lime;
+  border-radius: .5vmin;
+  background-color: green;
+  color: white;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 5vmin;
+}
+
+.start-game:hover {
+  /* border: solid .75vmin green; */
+  border: solid .75vmin white;
+  background-color: lime;
+  color: white;
+}
+
+/* -------------------------- Settings page -------------------------- */
 .back-button-container {
   align-self: center;
   justify-self: center;
@@ -117,8 +252,13 @@ button:hover {
   justify-content: space-between;
 }
 
+.settings-cog {
+  transition: transform .7s ease-in-out;
+}
 .settings-cog:hover {
   cursor: pointer;
+  transform: rotate(180deg);
+
 }
 
 .settings-title {
@@ -162,9 +302,10 @@ button:hover {
 .selected{
   background-color: lime;
   color: black;
-  border: solid .75vmin black;
+  border: solid .75vmin green;
 }
 
+/* -------------------------- Top 10 List -------------------------- */
 .high-scores-title {
   align-self: center;
   justify-self: center;
@@ -190,4 +331,61 @@ button:hover {
 .score-row {
   /* margin: 1rem; */
   padding: 1vmin 7vmin;
+}
+
+/* -------------------------- utils -------------------------- */
+.rainbow {
+  /* Chrome, Safari, Opera */
+ -webkit-animation: rainbow 5s infinite; 
+ 
+ /* Internet Explorer */
+ -ms-animation: rainbow 5s infinite;
+ 
+ /* Standar Syntax */
+ animation: rainbow 5s infinite; 
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+ 0%{color: orange;}	
+ 10%{color: purple;}	
+ 20%{color: red;}
+ 30%{color: CadetBlue;}
+ 40%{color: yellow;}
+ 50%{color: coral;}
+ 60%{color: green;}
+ 70%{color: cyan;}
+ 80%{color: DeepPink;}
+ 90%{color: DodgerBlue;}
+ 100%{color: orange;}
+}
+
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+  0%{color: orange;}	
+ 10%{color: purple;}	
+ 20%{color: red;}
+ 30%{color: CadetBlue;}
+ 40%{color: yellow;}
+ 50%{color: coral;}
+ 60%{color: green;}
+ 70%{color: cyan;}
+ 80%{color: DeepPink;}
+ 90%{color: DodgerBlue;}
+ 100%{color: orange;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+   0%{color: orange;}	
+ 10%{color: purple;}	
+ 20%{color: red;}
+ 30%{color: CadetBlue;}
+ 40%{color: yellow;}
+ 50%{color: coral;}
+ 60%{color: green;}
+ 70%{color: cyan;}
+ 80%{color: DeepPink;}
+ 90%{color: DodgerBlue;}
+ 100%{color: orange;}
 }

@@ -1,34 +1,42 @@
 import React, { useState} from "react";
 import useGame from "./hooks/useGame";
+import { createScore, getAllScores } from "../axios-services";
 
 const NewHighScore = () => {
-  const { boardState, gameState, setGameState, setRoute } = useGame();
+  const { boardState, gameState, setGameState, setHighScores, setRoute, setNewHighScore } = useGame();
 
   const [formState, setFormState] = useState({
-      score: gameState.score,
       name: ''
   })
 
+  const handleSubmit = async () => {
+    createScore(gameState.score, formState.name.toUpperCase())
+    const data = await getAllScores()
+    setHighScores(data)
+    setNewHighScore(false)
+  }
+
   return (
-      <div className="play-again-container">
-          <div className="settings-title">NEW HIGHSCORE!</div>
+      <div className="new-highscore-container">
+          <div className="new-highscore-title rainbow">NEW HIGHSCORE!</div>
     <form
-      className="play-again"
-      onSubmit={(e) => {
-        e.preventDefault();
-        
-      }}
+      className="new-highscore-form"
+      onSubmit={async (e) => {
+          e.preventDefault();
+          handleSubmit()
+        }}
       >
-          <div className="settings-title">{gameState.score}</div>
+          <div className='row'>
+          <div className="new-highscore-text">ENTER YOUR NAME HERE:</div>
         <input
-        className="play-again"
         type="text"
         value={formState.name.toUpperCase()}
-        onChange={(event) => setFormState({...formState, name: event.target.value })}
+        onChange={(event) => setFormState({ name: event.target.value })}
         required
         maxLength="3"
         ></input>
-        <button className="play-again" type="submit">SUBMIT</button>
+        </div>
+        <button className="new-highscore-submit" type="submit">SUBMIT</button>
         </form>
     </div>
   );

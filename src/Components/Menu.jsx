@@ -3,6 +3,7 @@ import useGame from "./hooks/useGame";
 
 const Menu = () => {
   const { gameState, setGameState, highScores, setRoute } = useGame();
+  const top5 = highScores.slice(0, 5);
 
   return (
     <>
@@ -20,7 +21,7 @@ const Menu = () => {
       </div>
       <div className="play-again-container">
         <button
-          className="play-again"
+          className="start-game"
           onClick={(e) => {
             e.preventDefault();
             setRoute("game");
@@ -28,12 +29,13 @@ const Menu = () => {
               ...gameState,
               score: 0,
               gameOver: false,
+              newHighScore: false,
             });
           }}
         >
           START
         </button>
-        <div className="high-scores-title">- TOP 10 -</div>
+        <div className="high-scores-title">- TOP 5 -</div>
         {Array.isArray(highScores) && highScores.length ? (
           <table className="highscores">
             <thead className="score-row">
@@ -48,7 +50,7 @@ const Menu = () => {
               </tr>
             </thead>
             <tbody>
-              {highScores.map((score, index) => (
+              {top5.map((score, index) => (
                 <tr key={`scoresTable: ${score.id}`}>
                   <td className="score-row">
                     {index === 0

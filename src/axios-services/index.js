@@ -23,3 +23,21 @@ export async function getAPIHealth() {
       return error.response.data;
     }
   };
+
+  export const createScore = async (score, name) => {
+    try {
+      const response = await axios.post(`api/scores`, {
+            score,
+            name,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+  
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  };

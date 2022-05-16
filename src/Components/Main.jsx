@@ -7,7 +7,7 @@ import Settings from "./Settings";
 import NewHighScore from "./NewHighScore";
 
 function Main() {
-  const { gameState, route } = useGame();
+  const { gameState, route, newHighScore } = useGame();
 
   return (
     <div className="main">
@@ -16,7 +16,7 @@ function Main() {
       {route === 'game' ?
         <>
           {gameState.gameOver ? <PlayAgain /> : null}
-          {gameState.newHighScore && gameState.gameOver ? <NewHighScore /> : null}
+          {newHighScore && gameState.gameOver ? <NewHighScore /> : null}
         </>
         : null
       }

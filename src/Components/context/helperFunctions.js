@@ -5,6 +5,7 @@ const snake = {
   x: 0,
   body: [],
   limit: 2,
+  limitAddedForApple: 1,
 };
 
 const apple = {
@@ -17,8 +18,9 @@ const velocity = {
   y: 0,
 };
 
-export const initializeGame = (boardState) => {
-  console.log("boardState");
+// const unusedBoard = []
+
+export const initializeGame = (boardState, gameState) => {
   score = 0;
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;
@@ -35,6 +37,16 @@ export const initializeGame = (boardState) => {
 
   snake.body = [];
   snake.limit = 2;
+  snake.limitAddedForApple = gameState.numAddedForApple;
+
+  // make an array of the board coordinates to check later
+  // unusedBoard.length = 0
+  // for (let x = 0; x < squareCount; x++) {
+  //   for (let y = 0; y < squareCount; y++) {
+  //     unusedBoard.push([x, y])
+  //   }
+  // }
+  // console.log(unusedBoard)
 };
 
 export const changeDirection = (event, gameState) => {
@@ -78,7 +90,7 @@ export const changeDirection = (event, gameState) => {
         velocity.y = 0;
       }
     }
-    console.log(event.keyCode, velocity.x, velocity.y);
+    // console.log(event.keyCode, velocity.x, velocity.y);
   }
 };
 
@@ -88,21 +100,23 @@ export const moveSnake = () => {
 };
 
 export const checkForApple = () => {
+
   if (snake.x === apple.x && snake.y === apple.y) {
-    apple.x = Math.floor(Math.random() * squareCount);
-    apple.y = Math.floor(Math.random() * squareCount);
+    apple.x = Math.floor(Math.random() * (squareCount - 0.1));
+    apple.y = Math.floor(Math.random() * (squareCount - 0.1));
 
     // make sure that apple doesn't spawn on a snake square
     for (let i = 0; i < snake.body.length; i++) {
       if (apple.x === snake.body[i][0] && apple.y === snake.body[i][1]) {
-        apple.x = Math.floor(Math.random() * (squareCount + 0.9));
-        apple.y = Math.floor(Math.random() * (squareCount + 0.9));
+        console.log(apple.x, snake.body[0][0], 'and', apple.y, snake.body[0][1])
+        apple.x = Math.floor(Math.random() * (squareCount - 0.1));
+        apple.y = Math.floor(Math.random() * (squareCount - 0.1));
         i = 0;
       }
     }
 
     score += 10;
-    snake.limit += 1;
+    snake.limit += snake.limitAddedForApple;
     return true;
   }
 };
@@ -137,9 +151,13 @@ export const renderNewFrame = () => {
   //adds current head position to body array at [0] every frame
   snake.body.unshift([snake.x, snake.y]);
 
+
+
   //takes away last body square every frame if length is too long
   if (snake.body.length > snake.limit) {
     snake.body.pop();
+    // unusedBoard.push(popped)
+    // console.log(unusedBoard)
   }
 
   // colors in all of the snake squares in the array

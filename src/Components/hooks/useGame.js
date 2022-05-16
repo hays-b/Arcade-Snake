@@ -7,10 +7,12 @@ const useGame = () => {
     setBoardState,
     gameState,
     setGameState,
-    velocity,
-    setVelocity,
-    playGame, 
-    // changeDirection,
+    highScores,
+    setHighScores,
+    route,
+    setRoute,
+    newHighScore, 
+    setNewHighScore,
   } = useContext(GameContext);
 
   return {
@@ -18,10 +20,12 @@ const useGame = () => {
     setBoardState,
     gameState,
     setGameState,
-    velocity,
-    setVelocity,
-    playGame, 
-    // changeDirection,
+    highScores,
+    setHighScores,
+    route,
+    setRoute,
+    newHighScore,
+    setNewHighScore
   };
 };
 

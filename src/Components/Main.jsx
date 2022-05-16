@@ -1,19 +1,32 @@
 import useGame from "./hooks/useGame";
 import Board from "./Board";
 import PlayAgain from "./PlayAgain";
-import ScoreDisplay from "./ScoreDisplay";  
+import Menu from "./Menu";
+import ScoreDisplay from "./ScoreDisplay";
+import Settings from "./Settings";
+import NewHighScore from "./NewHighScore";
+import AllHighScores from './AllHighScores'
 
 function Main() {
-    const { gameState } = useGame();
+  const { gameState, route, newHighScore } = useGame();
 
-    return (
-        <div className='main'>
-       {/* <StartGame /> */}
-        <ScoreDisplay />
-        {gameState.gameOver ? <PlayAgain />: null}
-        <Board />
-        </div>
-    )
+  return (
+    <div className="main">
+      {route === 'menu' ? <Menu />: null}
+      {route === 'settings' ? <Settings />: null}
+      {route === 'game' ?
+        <>
+          {gameState.gameOver ? <PlayAgain /> : null}
+          {newHighScore && gameState.gameOver ? <NewHighScore /> : null}
+        </>
+        : null
+      }
+      {route === 'allhighscores' ? <AllHighScores />: null}
+    {/* Board is always visible. It's just in the background if not being played */}
+      <ScoreDisplay />
+      <Board />
+    </div>
+  );
 }
 
 export default Main;

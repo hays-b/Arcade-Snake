@@ -5,7 +5,7 @@
   justify-content: center;
   align-content: center;
   /* background-color: black; */
-  border: solid .5vmin black;
+  border: .5vmin solid black;
 }
 
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  border: solid .5vmin black;
+  border: .5vmin solid black;
   /* background-color: black; */
 }
 
@@ -25,7 +25,7 @@
   justify-self: center;
   align-self: center;
   padding: 0.25vmin 0 0 0.25vmin;
-  border: solid 1vmin lime;
+  border: 1vmin solid lime;
   border-radius: .5vmin;
   outline-style: solid;
   outline-color: black;
@@ -34,6 +34,7 @@
   height: 60vmin;
 }
 
+/* -------------------------- Scores at the top -------------------------- */
 .score-container {
   position: absolute;
   align-self: center;
@@ -53,6 +54,126 @@
   font-size: 1.75vmin;
 }
 
+.scroll-container {
+  width: 60vmin;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.75vmin;
+  overflow: hidden;
+  color: white;
+}
+
+.scroll-text {
+  color: lime;
+  /* animation properties */
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  
+  -moz-animation: my-animation 10s linear infinite;
+  -webkit-animation: my-animation 10s linear infinite;
+  animation: my-animation 10s linear infinite;
+}
+
+/* -------------------------- New HighScore pop-up -------------------------- */
+.new-highscore-container {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 30vmin;
+  width: 60vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.new-highscore-form {
+  align-self: center;
+  justify-self: center;
+  margin: 2vmin;
+  padding: 2vmin;
+  border: .75vmin solid orange;
+  border-radius: .5vmin;
+  background-color: black;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 2.5vmin;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-highscore-title {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 3.5vmin;
+}
+
+.new-highscore-text {
+  align-self: center;
+  justify-self: center;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+input {
+  text-align: center;
+  padding: .5vmin;
+  width: 10vmin;
+  /* border: .75vmin solid orange; */
+  border: none;
+  border-bottom: .75vmin solid orange;
+  /* border-radius: .5vmin; */
+  background-color: black;
+  color: red;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 2.5vmin;
+}
+input:focus {
+  outline: none;
+}
+
+.new-highscore-submit {
+  align-self: center;
+  justify-self: center;
+  margin: 1vmin;
+  padding: 1vmin;
+  border: solid .75vmin orange;
+  border-radius: .5vmin;
+  background-color: black;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.new-highscore-submit:hover {
+  border: solid .75vmin white;
+  background-color: orange;
+  color: white;
+}
+
+/* -------------------------- Play again pop-up -------------------------- */
 .play-again-container {
   position: absolute;
   align-self: center;
@@ -62,6 +183,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.play-again-conditional {
+  margin-top: 20vmin;
 }
 
 .play-again {
@@ -78,4 +203,249 @@
   font-size: larger;
   font-weight: bold;
   font-size: 2.5vmin;
+}
+
+.play-again:hover {
+  border: solid .75vmin white;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+
+/* -------------------------- Settings cog -------------------------- */
+.settings-cog-container {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  margin: 0 0 52vmin 52vmin;
+  width: 10vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.settings-cog {
+  width: 5vmin;
+  height: 5vmin;
+  align-self: center;
+  justify-self: center;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1vmin;
+}
+
+/* -------------------------- Menu -------------------------- */
+.start-game {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin: 3vmin;
+  padding: 3vmin;
+  border: solid .75vmin lime;
+  border-radius: .5vmin;
+  background-color: green;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 5vmin;
+}
+
+.start-game:hover {
+  /* border: solid .75vmin green; */
+  border: solid .75vmin green;
+  background-color: lime;
+  color: white;
+}
+
+.red {
+  color: rgb(251, 92, 68)
+}
+
+.lightblue {
+  color: aqua;
+}
+
+/* -------------------------- Settings page -------------------------- */
+.back-button-container {
+  align-self: center;
+  justify-self: center;
+  width: 50vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.settings-cog {
+  transition: transform .7s ease-in-out;
+}
+.settings-cog:hover {
+  cursor: pointer;
+  transform: rotate(180deg);
+
+}
+
+.settings-title {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin-top: 3vmin;
+  padding: 1vmin;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.settings-row {
+  align-self: center;
+  justify-self: center;
+  width: 50vmin;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.settings-btn {
+  /* position: absolute; */
+  align-self: center;
+  justify-self: center;
+  margin: .5vmin;
+  padding: 2vmin;
+  border: solid .75vmin lime;
+  border-radius: .5vmin;
+  background-color: black;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.settings-btn:hover {
+  border: solid .75vmin white;
+  color: white;
+}
+
+.selected {
+  background-color: lime;
+  color: black;
+  border: solid .75vmin green;
+}
+
+/* -------------------------- Top 5 List -------------------------- */
+.high-scores-title {
+  align-self: center;
+  justify-self: center;
+  color: orange;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 3vmin;
+}
+
+.highscores {
+  align-self: center;
+  justify-self: center;
+  margin: 1vmin;
+  padding: 2vmin;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.5vmin;
+}
+
+.score-row {
+  /* margin: 1rem; */
+  padding: 1vmin 7vmin;
+}
+
+/* -------------------------- utils -------------------------- */
+.rainbow {
+  /* Chrome, Safari, Opera */
+ -webkit-animation: rainbow 5s infinite; 
+ 
+ /* Internet Explorer */
+ -ms-animation: rainbow 5s infinite;
+ 
+ /* Standar Syntax */
+ animation: rainbow 5s infinite; 
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+ 0%{color: orange;}	
+ 10%{color: purple;}	
+ 20%{color: red;}
+ 30%{color: CadetBlue;}
+ 40%{color: yellow;}
+ 50%{color: coral;}
+ 60%{color: green;}
+ 70%{color: cyan;}
+ 80%{color: DeepPink;}
+ 90%{color: DodgerBlue;}
+ 100%{color: orange;}
+}
+
+/* Internet Explorer */
+@-ms-keyframes rainbow{
+  0%{color: orange;}	
+ 10%{color: purple;}	
+ 20%{color: red;}
+ 30%{color: CadetBlue;}
+ 40%{color: yellow;}
+ 50%{color: coral;}
+ 60%{color: green;}
+ 70%{color: cyan;}
+ 80%{color: DeepPink;}
+ 90%{color: DodgerBlue;}
+ 100%{color: orange;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+   0%{color: orange;}	
+ 10%{color: purple;}	
+ 20%{color: red;}
+ 30%{color: CadetBlue;}
+ 40%{color: yellow;}
+ 50%{color: coral;}
+ 60%{color: green;}
+ 70%{color: cyan;}
+ 80%{color: DeepPink;}
+ 90%{color: DodgerBlue;}
+ 100%{color: orange;}
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+  from { -moz-transform: translateX(100%); }
+  to { -moz-transform: translateX(-100%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+  from { -webkit-transform: translateX(100%); }
+  to { -webkit-transform: translateX(-100%); }
+}
+
+@keyframes my-animation {
+  from {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  to {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
 }

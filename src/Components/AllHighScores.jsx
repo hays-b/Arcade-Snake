@@ -6,7 +6,7 @@ const AllHighScores = () => {
 
   return (
     <>
-      <div className="play-again-container">
+      <div className="play-again-container overflow-scroll">
            <div className="back-button-container">
       <button
         className="settings-btn"
@@ -17,6 +17,7 @@ const AllHighScores = () => {
         BACK
       </button>
       </div>
+      <div className="high-scores-title">- TOP 50 -</div>
         {Array.isArray(highScores) && highScores.length ? (
           <table className="highscores">
             <thead className="score-row">

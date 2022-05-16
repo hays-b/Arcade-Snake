@@ -45,6 +45,7 @@ async function getAllScores() {
 }
 
 async function deleteScore({ id }) {
+    console.log('hello', id)
   try {
     const {
       rows: [result],
@@ -56,6 +57,7 @@ async function deleteScore({ id }) {
     `,
       [id]
     );
+    console.log(result)
     return result;
   } catch (error) {
     throw error;

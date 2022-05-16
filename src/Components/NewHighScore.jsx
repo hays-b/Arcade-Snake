@@ -1,43 +1,54 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import useGame from "./hooks/useGame";
-import { createScore, getAllScores } from "../axios-services";
+import { createScore, getAllScores, deleteScore } from "../axios-services";
 
 const NewHighScore = () => {
-  const { boardState, gameState, setGameState, setHighScores, setRoute, setNewHighScore } = useGame();
+  const {
+    gameState,
+    highScores,
+    setHighScores,
+    setNewHighScore,
+  } = useGame();
 
   const [formState, setFormState] = useState({
-      name: ''
-  })
+    name: "",
+  });
 
   const handleSubmit = async () => {
-    createScore(gameState.score, formState.name.toUpperCase())
-    const data = await getAllScores()
-    setHighScores(data)
-    setNewHighScore(false)
-  }
+    createScore(gameState.score, formState.name.toUpperCase());
+    if (highScores[49]) {
+      await deleteScore(highScores[49].id);
+    }
+    const data = await getAllScores();
+    setHighScores(data);
+
+    setNewHighScore(false);
+  };
 
   return (
-      <div className="new-highscore-container">
-          <div className="new-highscore-title rainbow">NEW HIGHSCORE!</div>
-    <form
-      className="new-highscore-form"
-      onSubmit={async (e) => {
+    <div className="new-highscore-container">
+      <div className="new-highscore-title rainbow">NEW HIGHSCORE!</div>
+      <form
+        className="new-highscore-form"
+        onSubmit={async (e) => {
           e.preventDefault();
-          handleSubmit()
+          handleSubmit();
         }}
       >
-          <div className='row'>
+        <div className="row">
           <div className="new-highscore-text">ENTER YOUR NAME HERE:</div>
-        <input
-        type="text"
-        value={formState.name.toUpperCase()}
-        onChange={(event) => setFormState({ name: event.target.value })}
-        required
-        maxLength="3"
-        ></input>
+          <input
+            type="text"
+            value={formState.name.toUpperCase()}
+            onChange={(event) => setFormState({ name: event.target.value })}
+            required
+            maxLength="3"
+          ></input>
         </div>
-        <button className="new-highscore-submit" type="submit">SUBMIT</button>
-        </form>
+        <button className="new-highscore-submit" type="submit">
+          SUBMIT
+        </button>
+      </form>
     </div>
   );
 };

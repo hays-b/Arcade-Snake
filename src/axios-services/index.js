@@ -41,3 +41,18 @@ export async function getAPIHealth() {
       return error.response.data;
     }
   };
+
+  export const deleteScore = async (scoreId) => {
+      console.log('did we make it to axios', scoreId)
+    try {
+      const response = await axios.delete(`api/scores/${scoreId}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+  
+      return response.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  };

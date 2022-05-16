@@ -49,8 +49,7 @@ export const initializeGame = (boardState, gameState) => {
   // console.log(unusedBoard)
 };
 
-export const changeDirection = (event, gameState) => {
-  if (!gameState.gameOver) {
+export const changeDirection = (event) => {
     //ArrowUp
     if (event.keyCode === 38) {
       if (snake.body[1][1] < snake.y) {
@@ -91,8 +90,9 @@ export const changeDirection = (event, gameState) => {
       }
     }
     // console.log(event.keyCode, velocity.x, velocity.y);
-  }
 };
+
+document.addEventListener('keydown', changeDirection)
 
 export const moveSnake = () => {
   snake.x += velocity.x;

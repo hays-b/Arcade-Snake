@@ -272,8 +272,17 @@ button:hover {
   color: aqua;
 }
 
+.overflow-scroll {
+  width: 58vmin;
+  height: 55vmin;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 /* -------------------------- Settings page -------------------------- */
 .back-button-container {
+  top: 1vmin;
+  position: sticky;
   align-self: center;
   justify-self: center;
   width: 50vmin;
@@ -318,7 +327,7 @@ button:hover {
   align-self: center;
   justify-self: center;
   margin: .5vmin;
-  padding: 2vmin;
+  padding: 1.5vmin;
   border: solid .75vmin lime;
   border-radius: .5vmin;
   background-color: black;
@@ -326,7 +335,7 @@ button:hover {
   font-family: "Press Start 2P";
   font-size: larger;
   font-weight: bold;
-  font-size: 1.5vmin;
+  font-size: 1.25vmin;
 }
 
 .settings-btn:hover {
@@ -448,4 +457,24 @@ button:hover {
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: .5vmin;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lime; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; 
 }

@@ -5,6 +5,7 @@ import Menu from "./Menu";
 import ScoreDisplay from "./ScoreDisplay";
 import Settings from "./Settings";
 import NewHighScore from "./NewHighScore";
+import AllHighScores from './AllHighScores'
 
 function Main() {
   const { gameState, route, newHighScore } = useGame();
@@ -20,6 +21,7 @@ function Main() {
         </>
         : null
       }
+      {route === 'allhighscores' ? <AllHighScores />: null}
     {/* Board is always visible. It's just in the background if not being played */}
       <ScoreDisplay />
       <Board />

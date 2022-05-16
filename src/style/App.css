@@ -54,6 +54,29 @@
   font-size: 1.75vmin;
 }
 
+.scroll-container {
+  width: 60vmin;
+  color: lime;
+  font-family: "Press Start 2P";
+  font-size: larger;
+  font-weight: bold;
+  font-size: 1.75vmin;
+  overflow: hidden;
+  color: white;
+}
+
+.scroll-text {
+  color: lime;
+  /* animation properties */
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  
+  -moz-animation: my-animation 10s linear infinite;
+  -webkit-animation: my-animation 10s linear infinite;
+  animation: my-animation 10s linear infinite;
+}
+
 /* -------------------------- New HighScore pop-up -------------------------- */
 .new-highscore-container {
   position: absolute;
@@ -183,8 +206,7 @@ input:focus {
 }
 
 .play-again:hover {
-  border: solid .75vmin green;
-  background-color: lime;
+  border: solid .75vmin white;
   color: white;
 }
 
@@ -198,7 +220,7 @@ button:hover {
   position: absolute;
   align-self: center;
   justify-self: center;
-  margin: 0 0 50vmin 50vmin;
+  margin: 0 0 52vmin 52vmin;
   width: 10vmin;
   display: flex;
   flex-direction: column;
@@ -207,8 +229,8 @@ button:hover {
 }
 
 .settings-cog {
-  width: 7vmin;
-  height: 7vmin;
+  width: 5vmin;
+  height: 5vmin;
   align-self: center;
   justify-self: center;
   color: lime;
@@ -224,11 +246,11 @@ button:hover {
   align-self: center;
   justify-self: center;
   margin: 3vmin;
-  padding: 2.5vmin;
+  padding: 3vmin;
   border: solid .75vmin lime;
   border-radius: .5vmin;
   background-color: green;
-  color: white;
+  color: lime;
   font-family: "Press Start 2P";
   font-size: larger;
   font-weight: bold;
@@ -237,9 +259,17 @@ button:hover {
 
 .start-game:hover {
   /* border: solid .75vmin green; */
-  border: solid .75vmin white;
+  border: solid .75vmin green;
   background-color: lime;
   color: white;
+}
+
+.red {
+  color: rgb(251, 92, 68)
+}
+
+.lightblue {
+  color: aqua;
 }
 
 /* -------------------------- Settings page -------------------------- */
@@ -299,13 +329,18 @@ button:hover {
   font-size: 1.5vmin;
 }
 
-.selected{
+.settings-btn:hover {
+  border: solid .75vmin white;
+  color: white;
+}
+
+.selected {
   background-color: lime;
   color: black;
   border: solid .75vmin green;
 }
 
-/* -------------------------- Top 10 List -------------------------- */
+/* -------------------------- Top 5 List -------------------------- */
 .high-scores-title {
   align-self: center;
   justify-self: center;
@@ -319,7 +354,7 @@ button:hover {
 .highscores {
   align-self: center;
   justify-self: center;
-  margin: 3vmin;
+  margin: 1vmin;
   padding: 2vmin;
   color: lime;
   font-family: "Press Start 2P";
@@ -388,4 +423,29 @@ button:hover {
  80%{color: DeepPink;}
  90%{color: DodgerBlue;}
  100%{color: orange;}
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+  from { -moz-transform: translateX(100%); }
+  to { -moz-transform: translateX(-100%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+  from { -webkit-transform: translateX(100%); }
+  to { -webkit-transform: translateX(-100%); }
+}
+
+@keyframes my-animation {
+  from {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  to {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
 }

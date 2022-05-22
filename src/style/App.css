@@ -5,7 +5,7 @@
   justify-content: center;
   align-content: center;
   /* background-color: black; */
-  border: .5vmin solid black;
+  /* border: .5vmin solid black; */
 }
 
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  border: .5vmin solid black;
+  /* border: .5vmin solid black; */
   /* background-color: black; */
 }
 
@@ -477,4 +477,23 @@ button:hover {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: white; 
+}
+
+.background {
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  width: 210vmin;
+  height: 220vmin;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.foreground {
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  width: 219vmin;
+  height: 219vmin;
+  overflow: hidden;
 }

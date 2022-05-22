@@ -377,6 +377,61 @@ button:hover {
   padding: 1vmin 7vmin;
 }
 
+/* -------------------------- buttons -------------------------- */
+.buttons-container-up {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 81.5vmin;
+  z-index: 1;
+}
+
+.buttons-container-down {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 92.5vmin;
+  padding: 0;
+  z-index: 2;
+}
+
+.buttons-container-leftright {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  width: 39vmin;
+  justify-content: space-between;
+  margin-top: 87vmin;
+  z-index: 0;
+}
+
+.red-button {
+  background: url('https://res.cloudinary.com/dezxd4zbm/image/upload/v1653262658/EliteWebServices/arcade-snake/Button_vfwlfa.png');
+  background-size: 10vmin;
+  width: 10vmin;
+  height: 6vmin;
+}
+
+.red-button:hover {
+  background: url('https://res.cloudinary.com/dezxd4zbm/image/upload/v1653262663/EliteWebServices/arcade-snake/Button_hover_tknsqf.png');
+  background-size: 10vmin;
+  width: 10vmin;
+  height: 6vmin;
+}
+
+.red-button:active {
+  background: url('https://res.cloudinary.com/dezxd4zbm/image/upload/v1653262666/EliteWebServices/arcade-snake/Button_active_uznrxh.png');
+  background-size: 10vmin;
+  width: 10vmin;
+  height: 6vmin;
+}
+
+
 /* -------------------------- utils -------------------------- */
 .rainbow {
   /* Chrome, Safari, Opera */
@@ -483,8 +538,9 @@ button:hover {
   position: absolute;
   justify-self: center;
   align-self: center;
-  width: 210vmin;
-  height: 220vmin;
+  padding-bottom: 15vmin;
+  width: 250vmin;
+  height: 250vmin;
   z-index: -1;
   overflow: hidden;
 }
@@ -493,7 +549,8 @@ button:hover {
   position: absolute;
   justify-self: center;
   align-self: center;
-  width: 219vmin;
-  height: 219vmin;
+  margin-top: .05vmin;
+  width: 70.15vmin;
+  height: 70.15vmin;
   overflow: hidden;
 }

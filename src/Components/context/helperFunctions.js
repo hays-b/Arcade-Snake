@@ -18,7 +18,10 @@ const velocity = {
   y: 0,
 };
 
+let gameOver = true;
+
 export const initializeGame = (boardState, gameState) => {
+  gameOver = false;
   score = 0;
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;
@@ -39,46 +42,48 @@ export const initializeGame = (boardState, gameState) => {
 };
 
 export const changeDirection = (event) => {
-  //ArrowUp
-  if (event.keyCode === 38) {
-    if (snake.body[1][1] < snake.y) {
-      return;
-    } else {
-      velocity.x = 0;
-      velocity.y = -1;
+  if (!gameOver) {
+    //ArrowUp
+    if (event.keyCode === 38 || event.target.matches(".up")) {
+      if (snake.body[1][1] < snake.y) {
+        return;
+      } else {
+        velocity.x = 0;
+        velocity.y = -1;
+      }
     }
-  }
 
-  //ArrowDown
-  if (event.keyCode === 40) {
-    if (snake.body[1][1] > snake.y) {
-      return;
-    } else {
-      velocity.x = 0;
-      velocity.y = 1;
+    //ArrowDown
+    if (event.keyCode === 40 || event.target.matches(".down")) {
+      if (snake.body[1][1] > snake.y) {
+        return;
+      } else {
+        velocity.x = 0;
+        velocity.y = 1;
+      }
     }
-  }
 
-  //ArrowLeft
-  if (event.keyCode === 37) {
-    if (snake.body[1][0] < snake.x) {
-      return;
-    } else {
-      velocity.x = -1;
-      velocity.y = 0;
+    //ArrowLeft
+    if (event.keyCode === 37 || event.target.matches(".left")) {
+      if (snake.body[1][0] < snake.x) {
+        return;
+      } else {
+        velocity.x = -1;
+        velocity.y = 0;
+      }
     }
-  }
 
-  //ArrowRight
-  if (event.keyCode === 39) {
-    if (snake.body[1][0] > snake.x) {
-      return;
-    } else {
-      velocity.x = 1;
-      velocity.y = 0;
+    //ArrowRight
+    if (event.keyCode === 39 || event.target.matches(".right")) {
+      if (snake.body[1][0] > snake.x) {
+        return;
+      } else {
+        velocity.x = 1;
+        velocity.y = 0;
+      }
     }
+    console.log(event.keyCode, velocity.x, velocity.y);
   }
-  // console.log(event.keyCode, velocity.x, velocity.y);
 };
 
 document.addEventListener("keydown", changeDirection);
@@ -172,12 +177,14 @@ export const checkForCollision = () => {
     snake.y < 0 ||
     snake.y >= squareCount
   ) {
+    gameOver = true;
     return true;
   }
 
   // Check if snakes hits itself
   for (let i = 2; i < snake.body.length; i++) {
     if (snake.x === snake.body[i][0] && snake.y === snake.body[i][1]) {
+      gameOver = true;
       return true;
     }
   }

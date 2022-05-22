@@ -37,6 +37,7 @@ scoresRouter.post("/", async (req, res, next) => {
 });
 
 scoresRouter.delete("/:id", async (req, res, next) => {
+    console.log('hello', req.params)
   try {
     const deletedScore = await HighScore.deleteScore(req.params);
 

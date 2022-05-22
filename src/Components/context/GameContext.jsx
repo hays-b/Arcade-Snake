@@ -40,6 +40,7 @@ const GameProvider = ({ children }) => {
       setHighScores(data);
     };
     displayAllScores();
+    console.log('got the highscores')
   }, []);
 
   //   useEffect(() => {
@@ -85,7 +86,7 @@ const GameProvider = ({ children }) => {
     // update highScore if necessary
     if (isDefault) {
     if (Array.isArray(highScores) && highScores.length) {
-      if (gameState.score > highScores[9].score) {
+      if (!highScores[49] || gameState.score > highScores[49].score) {
         setNewHighScore(true);
       }
     }

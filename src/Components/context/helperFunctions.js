@@ -18,9 +18,10 @@ const velocity = {
   y: 0,
 };
 
-// const unusedBoard = []
+let gameOver = true;
 
 export const initializeGame = (boardState, gameState) => {
+  gameOver = false;
   score = 0;
   boardCtx = boardState.ctx;
   squareCount = boardState.tileCount;
@@ -38,21 +39,12 @@ export const initializeGame = (boardState, gameState) => {
   snake.body = [];
   snake.limit = 2;
   snake.limitAddedForApple = gameState.numAddedForApple;
-
-  // make an array of the board coordinates to check later
-  // unusedBoard.length = 0
-  // for (let x = 0; x < squareCount; x++) {
-  //   for (let y = 0; y < squareCount; y++) {
-  //     unusedBoard.push([x, y])
-  //   }
-  // }
-  // console.log(unusedBoard)
 };
 
-export const changeDirection = (event, gameState) => {
-  if (!gameState.gameOver) {
+export const changeDirection = (event) => {
+  if (!gameOver) {
     //ArrowUp
-    if (event.keyCode === 38) {
+    if (event.keyCode === 38 || event.target.matches(".up")) {
       if (snake.body[1][1] < snake.y) {
         return;
       } else {
@@ -62,7 +54,7 @@ export const changeDirection = (event, gameState) => {
     }
 
     //ArrowDown
-    if (event.keyCode === 40) {
+    if (event.keyCode === 40 || event.target.matches(".down")) {
       if (snake.body[1][1] > snake.y) {
         return;
       } else {
@@ -72,7 +64,7 @@ export const changeDirection = (event, gameState) => {
     }
 
     //ArrowLeft
-    if (event.keyCode === 37) {
+    if (event.keyCode === 37 || event.target.matches(".left")) {
       if (snake.body[1][0] < snake.x) {
         return;
       } else {
@@ -82,7 +74,7 @@ export const changeDirection = (event, gameState) => {
     }
 
     //ArrowRight
-    if (event.keyCode === 39) {
+    if (event.keyCode === 39 || event.target.matches(".right")) {
       if (snake.body[1][0] > snake.x) {
         return;
       } else {
@@ -90,9 +82,11 @@ export const changeDirection = (event, gameState) => {
         velocity.y = 0;
       }
     }
-    // console.log(event.keyCode, velocity.x, velocity.y);
+    console.log(event.keyCode, velocity.x, velocity.y);
   }
 };
+
+document.addEventListener("keydown", changeDirection);
 
 export const moveSnake = () => {
   snake.x += velocity.x;
@@ -100,22 +94,26 @@ export const moveSnake = () => {
 };
 
 export const checkForApple = () => {
-
   if (snake.x === apple.x && snake.y === apple.y) {
     apple.x = Math.floor(Math.random() * (squareCount - 0.1));
     apple.y = Math.floor(Math.random() * (squareCount - 0.1));
 
+    // make sure that apple doesn't spawn back on the snake's head
+    if (snake.x === apple.x && snake.y === apple.y) {
+      apple.x = Math.floor(Math.random() * (squareCount - 0.1));
+      apple.y = Math.floor(Math.random() * (squareCount - 0.1));
+    }
+
     // make sure that apple doesn't spawn on a snake square
     for (let i = 0; i < snake.body.length; i++) {
       if (apple.x === snake.body[i][0] && apple.y === snake.body[i][1]) {
-        console.log(apple.x, snake.body[0][0], 'and', apple.y, snake.body[0][1])
         apple.x = Math.floor(Math.random() * (squareCount - 0.1));
         apple.y = Math.floor(Math.random() * (squareCount - 0.1));
         i = 0;
       }
     }
 
-    score += 10;
+    score += snake.limitAddedForApple * 10;
     snake.limit += snake.limitAddedForApple;
     return true;
   }
@@ -151,8 +149,6 @@ export const renderNewFrame = () => {
   //adds current head position to body array at [0] every frame
   snake.body.unshift([snake.x, snake.y]);
 
-
-
   //takes away last body square every frame if length is too long
   if (snake.body.length > snake.limit) {
     snake.body.pop();
@@ -181,12 +177,14 @@ export const checkForCollision = () => {
     snake.y < 0 ||
     snake.y >= squareCount
   ) {
+    gameOver = true;
     return true;
   }
 
   // Check if snakes hits itself
   for (let i = 2; i < snake.body.length; i++) {
     if (snake.x === snake.body[i][0] && snake.y === snake.body[i][1]) {
+      gameOver = true;
       return true;
     }
   }

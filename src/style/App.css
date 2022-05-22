@@ -5,7 +5,7 @@
   justify-content: center;
   align-content: center;
   /* background-color: black; */
-  border: .5vmin solid black;
+  /* border: .5vmin solid black; */
 }
 
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  border: .5vmin solid black;
+  /* border: .5vmin solid black; */
   /* background-color: black; */
 }
 
@@ -272,8 +272,17 @@ button:hover {
   color: aqua;
 }
 
+.overflow-scroll {
+  width: 58vmin;
+  height: 55vmin;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
 /* -------------------------- Settings page -------------------------- */
 .back-button-container {
+  top: 1vmin;
+  position: sticky;
   align-self: center;
   justify-self: center;
   width: 50vmin;
@@ -318,7 +327,7 @@ button:hover {
   align-self: center;
   justify-self: center;
   margin: .5vmin;
-  padding: 2vmin;
+  padding: 1.5vmin;
   border: solid .75vmin lime;
   border-radius: .5vmin;
   background-color: black;
@@ -326,7 +335,7 @@ button:hover {
   font-family: "Press Start 2P";
   font-size: larger;
   font-weight: bold;
-  font-size: 1.5vmin;
+  font-size: 1.25vmin;
 }
 
 .settings-btn:hover {
@@ -367,6 +376,61 @@ button:hover {
   /* margin: 1rem; */
   padding: 1vmin 7vmin;
 }
+
+/* -------------------------- buttons -------------------------- */
+.buttons-container-up {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 81.5vmin;
+  z-index: 1;
+}
+
+.buttons-container-down {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 92.5vmin;
+  padding: 0;
+  z-index: 2;
+}
+
+.buttons-container-leftright {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  width: 39vmin;
+  justify-content: space-between;
+  margin-top: 87vmin;
+  z-index: 0;
+}
+
+.red-button {
+  background: url('https://res.cloudinary.com/dezxd4zbm/image/upload/v1653262658/EliteWebServices/arcade-snake/Button_vfwlfa.png');
+  background-size: 10vmin;
+  width: 10vmin;
+  height: 6vmin;
+}
+
+.red-button:hover {
+  background: url('https://res.cloudinary.com/dezxd4zbm/image/upload/v1653262663/EliteWebServices/arcade-snake/Button_hover_tknsqf.png');
+  background-size: 10vmin;
+  width: 10vmin;
+  height: 6vmin;
+}
+
+.red-button:active {
+  background: url('https://res.cloudinary.com/dezxd4zbm/image/upload/v1653262666/EliteWebServices/arcade-snake/Button_active_uznrxh.png');
+  background-size: 10vmin;
+  width: 10vmin;
+  height: 6vmin;
+}
+
 
 /* -------------------------- utils -------------------------- */
 .rainbow {
@@ -448,4 +512,45 @@ button:hover {
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: .5vmin;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lime; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: white; 
+}
+
+.background {
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  padding-bottom: 15vmin;
+  width: 250vmin;
+  height: 250vmin;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.foreground {
+  position: absolute;
+  justify-self: center;
+  align-self: center;
+  margin-top: .05vmin;
+  width: 70.15vmin;
+  height: 70.15vmin;
+  overflow: hidden;
 }

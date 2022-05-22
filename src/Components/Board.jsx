@@ -6,7 +6,6 @@ const Board = () => {
   const {
     boardState,
     setBoardState,
-    gameState,
   } = useGame();
 
   const canvasRef = useRef(null);
@@ -27,8 +26,6 @@ const Board = () => {
         backgroundColor: "black",
       }}
       ref={canvasRef}
-      onKeyDown={(event) => changeDirection(event, gameState)}
-      tabIndex="-1"
     ></canvas>
   );
 };

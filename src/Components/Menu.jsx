@@ -1,5 +1,6 @@
 import React from "react";
 import useGame from "./hooks/useGame";
+import settingsCog from "../images/lime-cog.png"
 
 const Menu = () => {
   const { gameState, setGameState, highScores, setRoute } = useGame();
@@ -10,7 +11,7 @@ const Menu = () => {
       <div className="settings-cog-container">
         <img
           className="settings-cog"
-          src="../images/lime-cog.png"
+          src={settingsCog}
           width="100px"
           height="100px"
           alt="SETTINGS"

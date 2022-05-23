@@ -1,7 +1,7 @@
 import "../style/App.css";
 import GameProvider from "./context/GameContext";
 import Main from "./Main";
-import background from "../images/arcade-background.png"
+import background from "../images/arcade-background-green-black.jpeg"
 import foreground from "../images/arcade-foreground.png"
 
 function App() {

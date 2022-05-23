@@ -443,7 +443,7 @@ input:focus {
 
 .red-button:hover {
   position: absolute;
-  background: url("../images/Button:hover.png");
+  background: url("../images/Button-hover.png");
   background-size: 12vmin;
   width: 12vmin;
   height: 7.5vmin;
@@ -451,7 +451,7 @@ input:focus {
 
 .red-button:active {
   position: absolute;
-  background: url("../images/Button:active.png");
+  background: url("../images/Button-active.png");
   background-size: 12vmin;
   width: 12vmin;
   height: 7.5vmin;

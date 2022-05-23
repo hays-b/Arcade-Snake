@@ -16,6 +16,7 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
+    "postinstall": "npm run client:build",
     "start": "node index.js",
     "client:dev": "react-scripts start",
     "client:build": "react-scripts build",

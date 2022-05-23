@@ -15,14 +15,14 @@ const NewHighScore = () => {
   });
 
   const handleSubmit = async () => {
-    createScore(gameState.score, formState.name.toUpperCase());
+    setNewHighScore(false);
+    const result = await createScore(gameState.score, formState.name.toUpperCase());
     if (highScores[49]) {
       await deleteScore(highScores[49].id);
     }
     const data = await getAllScores();
     setHighScores(data);
 
-    setNewHighScore(false);
   };
 
   return (

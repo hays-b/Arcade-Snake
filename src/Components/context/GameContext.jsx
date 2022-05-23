@@ -40,7 +40,6 @@ const GameProvider = ({ children }) => {
       setHighScores(data);
     };
     displayAllScores();
-    console.log('got the highscores')
   }, []);
 
   //   useEffect(() => {
@@ -58,7 +57,6 @@ const GameProvider = ({ children }) => {
       // start game interval
       const gameInterval = setInterval(() => {
         if (!gameState.gameOver) {
-          console.log();
           moveSnake();
           // update useStates if an apple is hit
           if (checkForApple()) {

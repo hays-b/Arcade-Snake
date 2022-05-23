@@ -43,7 +43,6 @@ export async function getAPIHealth() {
   };
 
   export const deleteScore = async (scoreId) => {
-      console.log('did we make it to axios', scoreId)
     try {
       const response = await axios.delete(`api/scores/${scoreId}`, {
             headers: {

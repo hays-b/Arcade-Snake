@@ -82,7 +82,7 @@ export const changeDirection = (event) => {
         velocity.y = 0;
       }
     }
-    console.log(event.keyCode, velocity.x, velocity.y);
+    // console.log(event.keyCode, velocity.x, velocity.y);
   }
 };
 
@@ -152,8 +152,6 @@ export const renderNewFrame = () => {
   //takes away last body square every frame if length is too long
   if (snake.body.length > snake.limit) {
     snake.body.pop();
-    // unusedBoard.push(popped)
-    // console.log(unusedBoard)
   }
 
   // colors in all of the snake squares in the array
@@ -166,7 +164,6 @@ export const renderNewFrame = () => {
       squareSize - 2
     );
   }
-  // console.log(snake.body)
 };
 
 export const checkForCollision = () => {

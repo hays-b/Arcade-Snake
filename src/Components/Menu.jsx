@@ -10,7 +10,7 @@ const Menu = () => {
       <div className="settings-cog-container">
         <img
           className="settings-cog"
-          src="https://res.cloudinary.com/dezxd4zbm/image/upload/v1652566342/EliteWebServices/arcade-snake/lime-cog_la6eel.png"
+          src="../images/lime-cog.png"
           width="100px"
           height="100px"
           alt="SETTINGS"

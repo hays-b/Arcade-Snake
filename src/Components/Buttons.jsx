@@ -8,7 +8,7 @@ const Buttons = () => {
   return (
     <>
       <div className="buttons-container-up">
-        <div
+        <button
           className="red-button up"
           onClick={(event) => {
             changeDirection(event);
@@ -16,21 +16,23 @@ const Buttons = () => {
         />
       </div>
       <div className="buttons-container-down">
-        <div
+        <button
           className="red-button down"
           onClick={(event) => {
             changeDirection(event);
           }}
         />
       </div>
-      <div className="buttons-container-leftright">
-        <div
+      <div className="buttons-container-left">
+        <button
           className="red-button left"
           onClick={(event) => {
             changeDirection(event);
           }}
         />
-        <div
+        </div>
+        <div className="buttons-container-right">
+        <button
           className="red-button right"
           onClick={(event) => {
             changeDirection(event);

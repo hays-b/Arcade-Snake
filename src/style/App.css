@@ -41,7 +41,7 @@
   width: 250vmin;
   height: 250vmin;
   z-index: -1;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .foreground {
@@ -51,7 +51,6 @@
   margin-top: 0.05vmin;
   width: 70.15vmin;
   height: 70.15vmin;
-  overflow: hidden;
 }
 
 /* -------------------------- Scores at the top -------------------------- */
@@ -59,7 +58,7 @@
   position: absolute;
   align-self: center;
   justify-self: center;
-  margin-bottom: 64vmin;
+  margin-bottom: 63vmin;
   width: 60vmin;
   display: flex;
   flex-direction: row;
@@ -235,17 +234,17 @@ input:focus {
   position: absolute;
   align-self: center;
   justify-self: center;
-  margin: 0 0 52vmin 52vmin;
-  width: 10vmin;
+  margin: 0 0 50vmin 50vmin;
+  width: 6.5vmin;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
 }
 
 .settings-cog {
-  width: 5vmin;
-  height: 5vmin;
+  width: 6.5vmin;
+  height: 6.5vmin;
   align-self: center;
   justify-self: center;
   color: lime;

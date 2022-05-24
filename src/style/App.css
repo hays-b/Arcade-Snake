@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
+  overflow: hidden;
   /* background-color: black; */
   /* border: .5vmin solid black; */
 }
@@ -34,14 +35,14 @@
 }
 
 .background {
-  position: absolute;
+  position: fixed;
   justify-self: center;
   align-self: center;
   padding-bottom: 15vmin;
   width: 250vmin;
   height: 250vmin;
   z-index: -1;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .foreground {
@@ -55,7 +56,7 @@
 
 /* -------------------------- Scores at the top -------------------------- */
 .score-container {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   margin-bottom: 63vmin;
@@ -194,7 +195,7 @@ input:focus {
 
 /* -------------------------- Play again pop-up -------------------------- */
 .play-again-container {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   margin-bottom: 0;
@@ -209,7 +210,6 @@ input:focus {
 }
 
 .play-again {
-  /* position: absolute; */
   align-self: center;
   justify-self: center;
   margin: 3vmin;
@@ -231,7 +231,7 @@ input:focus {
 
 /* -------------------------- Settings cog -------------------------- */
 .settings-cog-container {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   margin: 0 0 50vmin 50vmin;
@@ -256,7 +256,6 @@ input:focus {
 
 /* -------------------------- Menu -------------------------- */
 .start-game {
-  /* position: absolute; */
   align-self: center;
   justify-self: center;
   margin: 3vmin;
@@ -314,7 +313,6 @@ input:focus {
 }
 
 .settings-title {
-  /* position: absolute; */
   align-self: center;
   justify-self: center;
   margin-top: 3vmin;
@@ -336,7 +334,6 @@ input:focus {
 }
 
 .settings-btn {
-  /* position: absolute; */
   align-self: center;
   justify-self: center;
   margin: 0.5vmin;
@@ -392,48 +389,47 @@ input:focus {
 
 /* -------------------------- buttons -------------------------- */
 .buttons-container-up {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   display: flex;
   justify-content: center;
-  margin-top: 75vmin;
+  margin-top: 81vmin;
   z-index: 1;
 }
 
 .buttons-container-down {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   display: flex;
   justify-content: center;
-  margin-top: 85vmin;
+  margin-top: 92vmin;
   padding: 0;
   z-index: 2;
 }
 
 .buttons-container-left {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   justify-content: center;
   display: flex;
-  margin: 80vmin 29vmin 0 0;
+  margin: 87vmin 29vmin 0 0;
   z-index: 0;
 }
 
 .buttons-container-right {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
   justify-content: center;
   display: flex;
-  margin: 80vmin 0 0 29vmin;
+  margin: 87vmin 0 0 29vmin;
   z-index: 0;
 }
 
 .red-button {
-  position: absolute;
   background: url("../images/Button.png");
   background-size: 12vmin;
   width: 12vmin;
@@ -441,7 +437,6 @@ input:focus {
 }
 
 .red-button:hover {
-  position: absolute;
   background: url("../images/Button-hover.png");
   background-size: 12vmin;
   width: 12vmin;
@@ -449,7 +444,6 @@ input:focus {
 }
 
 .red-button:active {
-  position: absolute;
   background: url("../images/Button-active.png");
   background-size: 12vmin;
   width: 12vmin;

@@ -1,6 +1,6 @@
 import React from "react";
 import useGame from "./hooks/useGame";
-import settingsCog from "../images/lime-cog.png"
+import settingsCog from "../images/lime-cog.png";
 
 const Menu = () => {
   const { gameState, setGameState, highScores, setRoute } = useGame();
@@ -8,19 +8,19 @@ const Menu = () => {
 
   return (
     <>
-      <div className="settings-cog-container">
-        <img
-          className="settings-cog"
-          src={settingsCog}
-          width="100px"
-          height="100px"
-          alt="SETTINGS"
-          onClick={() => {
-            setRoute("settings");
-          }}
-        />
-      </div>
       <div className="play-again-container">
+        <div className="settings-cog-container">
+          <img
+            className="settings-cog"
+            src={settingsCog}
+            width="100px"
+            height="100px"
+            alt="SETTINGS"
+            onClick={() => {
+              setRoute("settings");
+            }}
+          />
+        </div>
         <button
           className="start-game"
           onClick={(e) => {
@@ -69,9 +69,14 @@ const Menu = () => {
             </tbody>
           </table>
         ) : null}
-        <button className='new-highscore-submit' onClick={()=>{
-          setRoute('allhighscores')
-        }}>SEE ALL HIGHSCORES</button>
+        <button
+          className="new-highscore-submit"
+          onClick={() => {
+            setRoute("allhighscores");
+          }}
+        >
+          SEE ALL HIGHSCORES
+        </button>
       </div>
     </>
   );

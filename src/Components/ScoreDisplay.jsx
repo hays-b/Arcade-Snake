@@ -10,24 +10,26 @@ const ScoreDisplay = () => {
     gameState.numAddedForApple === 1;
 
   return (
-    <div className="score-container">
-      {route === "menu" && Array.isArray(highScores) && highScores.length ? (
-        // <div className="score">
-        //   TOP SCORE: {highScores[0].score} -{highScores[0].name}-
-        // </div>
-        <div className="scroll-container">
-        <div className="scroll-text"> TOP SCORE: {highScores[0].score} - {highScores[0].name}</div>
+      <div className="score-container">
+        {route === "menu" && Array.isArray(highScores) && highScores.length ? (
+          <div className="scroll-container">
+            <div className="scroll-text">
+              {" "}
+              TOP SCORE: {highScores[0].score} - {highScores[0].name}
+            </div>
+          </div>
+        ) : null}
+        {route === "game" ? (
+          <>
+            <div className="score">SCORE: {gameState.score}</div>
+            {isDefault ? (
+              <div className="score">BEST: {gameState.highScore}</div>
+            ) : (
+              <div className="score">CUSTOM SETTINGS</div>
+            )}
+          </>
+        ) : null}
       </div>
-      ) : null}
-      {route === "game" ? (
-        <>
-          <div className="score">SCORE: {gameState.score}</div>
-          {isDefault ?
-          <div className="score">BEST: {gameState.highScore}</div>
-          : <div className="score">CUSTOM SETTINGS</div>}
-        </>
-      ) : null}
-    </div>
   );
 };
 

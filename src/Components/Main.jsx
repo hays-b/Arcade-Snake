@@ -13,6 +13,8 @@ function Main() {
 
   return (
     <div className="main">
+      <ScoreDisplay />
+      <Buttons />
       {route === 'menu' ? <Menu />: null}
       {route === 'settings' ? <Settings />: null}
       {route === 'game' ?
@@ -24,9 +26,7 @@ function Main() {
       }
       {route === 'allhighscores' ? <AllHighScores />: null}
     {/* Board is always visible. It's just in the background if not being played */}
-      <ScoreDisplay />
       <Board />
-      <Buttons />
     </div>
   );
 }

@@ -58,15 +58,14 @@
 /* -------------------------- Scores at the top -------------------------- */
 .score-container {
   position: fixed;
-  /* padding: 60vmin; */
-  /* height: 60vmin; */
+  height: 65vmin;
   align-self: center;
   justify-self: center;
-  margin-bottom: 63vmin;
-  /* width: 60vmin; */
+  width: 60vmin;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 0;
 }
 
 .score {
@@ -75,6 +74,7 @@
   font-size: larger;
   font-weight: bold;
   font-size: 1.75vmin;
+  z-index: 1;
 }
 
 .scroll-container {
@@ -86,9 +86,11 @@
   font-size: 1.75vmin;
   overflow: hidden;
   color: white;
+  z-index: 1;
 }
 
 .scroll-text {
+  z-index: 1;
   color: lime;
   /* animation properties */
   -moz-transform: translateX(100%);
@@ -238,14 +240,13 @@ input:focus {
   justify-self: center;
   width: 57vmin;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
+  z-index: -1;
 }
 
 .settings-cog {
   width: 6.5vmin;
   height: 6.5vmin;
-  align-self: right;
-  justify-self: top;
   color: lime;
   font-family: "Press Start 2P";
   font-size: larger;
@@ -388,45 +389,30 @@ input:focus {
 }
 
 /* -------------------------- buttons -------------------------- */
-.buttons-container-up {
+.buttons-container-up-down {
   position: fixed;
   align-self: center;
   justify-self: center;
   display: flex;
-  justify-content: center;
-  margin-top: 81vmin;
-  z-index: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 102vmin;
+  z-index: .5;
 }
 
-.buttons-container-down {
-  position: fixed;
-  align-self: center;
-  justify-self: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 92vmin;
-  padding: 0;
-  z-index: 2;
-}
-
-.buttons-container-left {
+.buttons-container-left-right {
   position: fixed;
   align-self: center;
   justify-self: center;
   justify-content: center;
   display: flex;
-  margin: 87vmin 29vmin 0 0;
-  z-index: 0;
-}
-
-.buttons-container-right {
-  position: fixed;
-  align-self: center;
-  justify-self: center;
-  justify-content: center;
-  display: flex;
-  margin: 87vmin 0 0 29vmin;
-  z-index: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 94vmin;
+  width: 45vmin;
+  z-index: -.5;
 }
 
 .red-button {

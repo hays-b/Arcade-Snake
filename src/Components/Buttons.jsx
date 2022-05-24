@@ -7,37 +7,37 @@ const Buttons = () => {
 
   return (
     <>
-      <div className="buttons-container-up">
-        <button
-          className="red-button up"
-          onClick={(event) => {
-            changeDirection(event);
-          }}
-        />
-      </div>
-      <div className="buttons-container-down">
-        <button
-          className="red-button down"
-          onClick={(event) => {
-            changeDirection(event);
-          }}
-        />
-      </div>
-      <div className="buttons-container-left">
+      <div className="buttons-container-left-right">
         <button
           className="red-button left"
           onClick={(event) => {
             changeDirection(event);
           }}
         />
-        </div>
-        <div className="buttons-container-right">
+        {/* <div className="buttons-container-right"> */}
         <button
           className="red-button right"
           onClick={(event) => {
             changeDirection(event);
           }}
         />
+        {/* </div> */}
+      </div>
+      <div className="buttons-container-up-down">
+        <button
+          className="red-button up"
+          onClick={(event) => {
+            changeDirection(event);
+          }}
+        />
+        {/* <div className="buttons-container-down"> */}
+        <button
+          className="red-button down"
+          onClick={(event) => {
+            changeDirection(event);
+          }}
+        />
+        {/* </div> */}
       </div>
     </>
   );

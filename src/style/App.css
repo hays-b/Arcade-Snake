@@ -104,19 +104,20 @@
 
 /* -------------------------- New HighScore pop-up -------------------------- */
 .new-highscore-container {
-  position: absolute;
+  position: fixed;
   align-self: center;
   justify-self: center;
-  margin-bottom: 30vmin;
+  padding: 1vmin;
+  height: 55vmin;
   width: 60vmin;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .new-highscore-form {
   align-self: center;
-  justify-self: center;
+  justify-self: flex-start;
   margin: 2vmin;
   padding: 2vmin;
   border: 0.75vmin solid orange;
@@ -140,7 +141,7 @@
 .new-highscore-title {
   /* position: absolute; */
   align-self: center;
-  justify-self: center;
+  /* justify-self: center; */
   color: orange;
   font-family: "Press Start 2P";
   font-size: larger;
@@ -238,6 +239,7 @@ input:focus {
   position: fixed;
   align-self: center;
   justify-self: center;
+  height: 57vmin;
   width: 57vmin;
   display: flex;
   justify-content: flex-end;

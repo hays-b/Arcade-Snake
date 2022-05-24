@@ -27,6 +27,8 @@
   align-self: center;
   padding: 0.25vmin 0 0 0.25vmin;
   border: 1vmin solid lime;
+  -webkit-border-radius: 0.5vmin;
+  -moz-border-radius: 0.5vmin;
   border-radius: 0.5vmin;
   outline-style: solid;
   outline-color: black;
@@ -104,11 +106,9 @@
 
 /* -------------------------- New HighScore pop-up -------------------------- */
 .new-highscore-container {
-  position: fixed;
   align-self: center;
   justify-self: center;
   padding: 1vmin;
-  height: 55vmin;
   width: 60vmin;
   display: flex;
   flex-direction: column;
@@ -400,7 +400,7 @@ input:focus {
   justify-content: flex-end;
   align-items: center;
   height: 102vmin;
-  z-index: .5;
+  z-index: 0.5;
 }
 
 .buttons-container-left-right {
@@ -414,7 +414,7 @@ input:focus {
   align-items: flex-end;
   height: 94vmin;
   width: 45vmin;
-  z-index: -.5;
+  z-index: -0.5;
 }
 
 .red-button {

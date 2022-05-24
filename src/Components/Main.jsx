@@ -5,8 +5,8 @@ import Menu from "./Menu";
 import ScoreDisplay from "./ScoreDisplay";
 import Settings from "./Settings";
 import NewHighScore from "./NewHighScore";
-import AllHighScores from './AllHighScores';
-import Buttons from './Buttons'
+import AllHighScores from "./AllHighScores";
+import Buttons from "./Buttons";
 
 function Main() {
   const { gameState, route, newHighScore } = useGame();
@@ -15,17 +15,20 @@ function Main() {
     <div className="main">
       <ScoreDisplay />
       <Buttons />
-      {route === 'menu' ? <Menu />: null}
-      {route === 'settings' ? <Settings />: null}
-      {route === 'game' ?
+      {route === "menu" ? <Menu /> : null}
+      {route === "settings" ? <Settings /> : null}
+      {route === "game" ? (
         <>
-          {gameState.gameOver ? <PlayAgain /> : null}
-          {newHighScore && gameState.gameOver ? <NewHighScore /> : null}
+          {gameState.gameOver ? (
+            <div className="play-again-container">
+              {newHighScore ? <NewHighScore /> : null}
+              <PlayAgain />
+            </div>
+          ) : null}
         </>
-        : null
-      }
-      {route === 'allhighscores' ? <AllHighScores />: null}
-    {/* Board is always visible. It's just in the background if not being played */}
+      ) : null}
+      {route === "allhighscores" ? <AllHighScores /> : null}
+      {/* Board is always visible. It's just in the background if not being played */}
       <Board />
     </div>
   );
